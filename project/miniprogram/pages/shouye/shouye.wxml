@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view>
+  <view class="container">
+    <text id="name">首页</text>
+  </view>
+  <view id="shouye">
+    <view class="shouye-search">
+      <input  bindinput="getInput" placeholder="搜索" placeholder-class="place-style iconfont icon-ai219"></input>
+    </view>
+    <view class="shouye-teacher">
+      <view class="shouye-type">
+        <view class="type-kemu">{{kemu}}</view>
+        <view class="type-more" bindtap="moreTeacher">更多>></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+

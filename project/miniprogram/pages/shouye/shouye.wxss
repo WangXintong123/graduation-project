@@ -1,0 +1,54 @@
+/**shouye.wxss**/
+
+page {
+  background: #f6f6f6; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.shouye-search{
+  background-color: #fa381e;
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.shouye-search input{
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 0 2%;
+  width: 60%;
+  height:65%;
+  font-size: 25rpx;
+}
+.place-style{
+  color:rgb(187, 182, 182);
+  font-size: 27rpx;
+}
+.shouye-teacher{
+  height:400rpx;
+  background-color: rgb(234, 240, 252);
+  border-bottom:1.5px solid #d5d4d4;
+}
+.shouye-type{
+  height:18%;
+  width:96%;
+  margin-left: 2%;
+  border-bottom:1.5px solid #d5d4d4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.type-kemu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 27rpx;
+}
+.type-more{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 25rpx;
+}
