@@ -1,7 +1,7 @@
 {
   "pages": [
+    "pages/authorize/authorize",
     "pages/shouye/shouye",
-
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -16,6 +16,16 @@
     "pages/im/im",
     "pages/im/room/room"
   ],
+  "tabBar": {  
+    "list": [{     
+      "pagePath": "pages/shouye/shouye",      
+      "text": "首页"    
+     }, 
+     {      
+      "pagePath": "pages/index/index",      
+      "text": "index"    
+    }]  
+  },  
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
