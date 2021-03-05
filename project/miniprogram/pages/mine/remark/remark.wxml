@@ -1,0 +1,34 @@
+ <!--miniprogram/pages/mine/remark/remark.wxml-->
+<view class="like-container">
+  <icon class="huitui iconfont icon-arrow-left"></icon>
+</view>
+<view class="like-type">
+  <view data-num="1" class="like + {{oneclass}}" bindtap="getActive">教师</view>
+  <view data-num="2" class="like + {{twoclass}}" bindtap="getActive">教材</view>
+</view>
+<view class="review-out">
+  <view class="review-one" wx:for="{{arr}}" wx:for-item="titem">
+    <view class="review-img">
+     <image  src="{{titem.img}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
+    </view>
+    <view class="review-mess">
+      <view class="mess-point">
+        推荐指数:
+        <view class="hot-icon">
+           <icon wx:for="{{titem.fires}}" class='iconfont icon-huomiao + {{item.class}}'  hidden="{{flagt}}"></icon>
+           <icon wx:for="{{titem.fires}}" class='iconfont icon-xingxing + {{item.class}}'  hidden="{{flagb}}"></icon>
+          </view>
+      </view>
+      <view class="mess-ping">
+        <text class="mess-text">{{titem.review}}</text>   
+      </view>
+      <view class="mess-like">
+       <icon class="iconfont icon-dianzan"></icon><text>{{titem.like}}</text>
+       <view class="shanchu"> <icon class="iconfont icon-shanchu1 " style="  color: rgb(163, 163, 163);font-size:40rpx;"></icon></view>
+      </view>
+      
+    </view>
+  </view>
+  
+</view>
+

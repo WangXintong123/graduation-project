@@ -1,0 +1,139 @@
+/* miniprogram/pages/mine/remark/remark.wxss */
+.like-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fa381e;
+  height:80rpx;
+  color: #fff;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+} 
+.like-container text{
+  font-size: 38rpx;
+}
+.huitui{
+  font-size: 35rpx;
+  font-weight: bolder;
+  position: absolute;
+  left: 10rpx;
+  margin-top: -4rpx;
+}
+.like-type{
+  width:100%;
+  height:120rpx;
+  background-color: #fa381e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.like{
+  width:45%;
+  height:80rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  background-color: #fa381e;
+  border: 1px solid #fff;
+  color: #fff;
+}
+.active{
+  background-color: #fff;
+  border: 1px solid #fa381e;
+  color:#fa381e ;
+}
+.review-out{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.review-one{
+  width:95%;
+  height:320rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40rpx;
+}
+.review-img{
+  width:20%;
+  height:68%;
+  /* background-color: azure; */
+  margin-right: 30rpx;
+}
+.review-mess{
+  width:70%;
+  height:85%;
+  /* background-color: rgb(254, 240, 255); */
+}
+.mess-point{
+  width:100%;
+  height: 25%;
+  /* background-color: beige; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 30rpx;
+}
+.mess-ping{
+  width:100%;
+  height:50%;
+  /* background-color: burlywood; */
+  margin-top: 15rpx;
+}
+.mess-text{
+  color:rgb(136, 135, 135);
+  font-size: 29rpx;
+  text-overflow:ellipsis;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-indent:1.5em
+}
+.mess-like{
+  margin-top: -10rpx;
+  margin-left: 20rpx;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.mess-like icon{
+  font-size: 37rpx;
+  color: rgb(255, 165, 145);
+}
+.mess-like text{
+  font-size: 27rpx;
+  color: rgb(255, 165, 145);
+}
+.hot-icon{
+  margin-left: 10rpx;
+  margin-bottom: 10rpx;
+}
+.hot-fire{
+  width:90%;
+  height:15%;
+  padding-bottom: 10rpx;
+}
+.grayfire{
+  font-size: 35rpx;
+  color:rgb(208, 206, 206);
+}
+.redfire{
+  color: #fa6b1e;
+  font-size: 35rpx;
+}
+.shanchu{
+  position: absolute;
+  right:15rpx;
+  top: 20rpx;
+}

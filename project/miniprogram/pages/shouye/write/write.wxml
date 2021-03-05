@@ -1,0 +1,19 @@
+<!--miniprogram/pages/shouye/write/write.wxml-->
+<text bindtap="show">展示</text>
+<view class="write-out" hidden="{{hide}}">
+  <view class="write-inner">
+    <view class="write-off">
+      <icon bindtap="writeOff" class="iconfont icon-guanbi"></icon>
+    </view>
+    <text style="margin-top:40rpx">推荐指数</text>
+    <view class="write-fires">
+      <icon wx:for="{{fires}}" data-num="{{item.name}}" class="iconfont icon-huomiao+{{item.firestyle}}" bindtap="setFires"></icon>
+      <text>{{chose}}</text>
+    </view>
+    <view class="write-word">
+      <textarea bindinput="textBlur" class="word-class" maxlength="-1"></textarea>
+    </view>
+  </view>
+  <!-- <view class="write-sub"></view> -->
+  <button class="write-sub" bindtap="writeSub">发表</button>
+</view>

@@ -1,0 +1,12 @@
+   <!--miniprogram/pages/shouye/search/search.wxml-->
+<view class='search-chose'>
+  <view class="chose-type">
+    <view class="type-name">{{name}}</view>
+    <icon class="iconfont icon-xiala type-xiala" bindtap="choseType"></icon>
+  </view>
+  <input placeholder-class="iconfont icon-ai219" class="search-input"></input>
+</view>
+<view class="chose-list" hidden="{{flag}}">
+  <view data-name="j" class="list-in" bindtap="getName">教材</view>
+  <view data-name="l" class="list-in" bindtap="getName">老师</view>
+</view>

@@ -6,6 +6,8 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
+/* 首页主体部分 */
+  /* 查找部分 */
 .shouye-search{
   background-color: #fa381e;
   height: 70rpx;
@@ -26,10 +28,11 @@ page {
   color:rgb(187, 182, 182);
   font-size: 27rpx;
 }
+/* 教师部分 */
 .shouye-teacher{
-  height:400rpx;
-  background-color: rgb(234, 240, 252);
-  border-bottom:1.5px solid #d5d4d4;
+  height:450rpx;
+  /* background-color: rgb(234, 240, 252); */
+  border-bottom:1px solid #d5d4d4;
 }
 .shouye-type{
   height:18%;
@@ -51,4 +54,95 @@ page {
   flex-direction: column;
   justify-content: center;
   font-size: 25rpx;
+}
+.shouye-show{
+  height:72%;
+  width:96%;
+  margin-left: 2%;
+  margin-top: 3%;
+  /* background-color: blanchedalmond; */
+  flex-direction: row;
+}
+.show-hot{
+  width:30%;
+  height:100%;
+  /* background-color: chartreuse; */
+  margin:0 1.6%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hot-pic{
+  width:150rpx;
+  height:65%;
+  /* background-color: cyan; */
+}
+.hot-name{
+  margin-top: 10rpx;
+  margin-bottom:10rpx ;
+  font-size: 28rpx;
+}
+.hot-fire{
+  width:90%;
+  /* background-color: rgb(236, 215, 247); */
+  height:15%;
+  padding-bottom: 10rpx;
+}
+.grayfire{
+  font-size: 38rpx;
+  color:rgb(208, 206, 206);
+}
+.redfire{
+  color: #fa6b1e;
+  font-size: 38rpx;
+}
+.bottom{
+  height:100rpx;
+  width:100%;
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position:fixed; 
+  bottom:0;
+}
+.bottom-in{
+  height:84%;
+  width:80%;
+  background-color: plum;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.bottom-tab{
+  height:100%;
+  width:14%;
+  background-color: powderblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:rgb(198, 198, 198)
+}
+.boticon{
+  font-size: 45rpx;
+}
+.bottext{
+  margin-top: 5rpx;
+  font-size: 28rpx;
+}
+.bottom-tab-active{
+  height:100%;
+  width:14%;
+  background-color: powderblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:#fa381e
 }

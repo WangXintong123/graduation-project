@@ -1,0 +1,17 @@
+<!--miniprogram/pages/mine/mine.wxml-->
+<view class="mine-mine">
+  <view class="tuichu">
+    <view class="tuichu-word">退出登录</view>
+  </view>
+  <view class="mine-message">
+    <view class="mine-img">
+      <image src="./image/mine.jpg" mode="scaleToFill" style=" width:150rpx;height:150rpx;border-radius: 100%;"></image>
+    </view>
+    <view class="mine-name">草莓炒大肠</view>
+  </view>
+</view>
+<view class="mine-function ">
+  <view class="pinglun fun-inner" bindtap="intoPing">我的评论</view>
+  <view class="shoucang fun-inner" bindtap="intoLike">收藏夹</view>
+  <view class="mine fun-inner" bindtap="intoMine">我的信息</view>
+</view>
