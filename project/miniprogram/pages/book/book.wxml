@@ -1,14 +1,14 @@
 <!--miniprogram/pages/book/book.wxml-->
-<view class="book-container">书籍</view>
+<view class="book-container fixed">书籍</view>
 <view class="kemu-out">
   <view class="kemu-list" wx:for="{{kemu}}">
     <view class="kemu-img" bindtap="intoDetail">
       <view class="kemu-on">
-      <view class="kemu-into">
-        <view class="into-word">
-          <view>进入</view><view>榜单</view>
+        <view class="kemu-into">
+          <view class="into-word">
+            <view>进入</view><view>榜单</view>
+          </view>
         </view>
-      </view>
       </view>
       <image src="{{item.src}}" mode="scaleToFill"  style='width:100%;height:100%;position: absolute;z-index: 1;'/>
     </view>

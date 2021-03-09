@@ -29,6 +29,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  //选择展示对老师还是对教材的评论
   getActive:function(e){
     if(e.target.dataset.num==1){
       this.setData({
@@ -62,6 +63,7 @@ Page({
       }
     }
   },
+  //显示评分星星火苗
   showFire:function(arg){
     for(var j=0;j<this.data.firesLength;j++){
       this.setData({
@@ -76,7 +78,13 @@ Page({
       }
     }
   },
-  onLoad: function (e) {
+  //返回上一级
+  back:function(){
+    wx.navigateBack({
+      delta:1
+    })
+  },
+  onLoad: function (e) {//展示默认样式
     for(var k=0;k<this.data.t_review.length;k++){
       this.setData({
         [`arr[${k}]`]:this.data.t_review[k]

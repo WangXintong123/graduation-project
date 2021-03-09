@@ -7,6 +7,23 @@ page {
   justify-content: flex-start;
 }
 /* 首页主体部分 */
+.shouye-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fa381e;
+  height:65rpx;
+  color: #fff;
+  justify-content: center;
+} 
+.container text{
+  font-size: 30rpx;
+}
+.fixed{
+  position: fixed;
+  width:100%;
+}
   /* 查找部分 */
 .shouye-search{
   background-color: #fa381e;
@@ -27,6 +44,9 @@ page {
 .place-style{
   color:rgb(187, 182, 182);
   font-size: 27rpx;
+}
+#shouye{
+  margin-top: 135rpx;
 }
 /* 教师部分 */
 .shouye-teacher{

@@ -47,10 +47,16 @@
   border: 1px solid #fa381e;
   color:#fa381e ;
 }
+.fixed{
+  position: fixed;
+  width:100%;
+  z-index: 10;
+}
 .review-out{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 200rpx;
 }
 .review-one{
   width:95%;

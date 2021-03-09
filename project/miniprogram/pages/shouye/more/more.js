@@ -16,6 +16,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  //返回上一页路由
+  back:function(e){
+    wx.navigateBack({
+      delta:1
+    })
+  },
+  //进入老师详情页
+  intoDetail:function(){
+    wx.navigateTo({
+      url: '/pages/shouye/detail/detail',
+    })
+  },
+  //显示详情页的火苗
   showFire:function(arg){
     for(var j=0;j<this.data.firesLength;j++){
       this.setData({
@@ -40,6 +53,7 @@ Page({
         })
       }
     }
+    //调用火苗函数
     for(var n=0;n<this.data.more_teacher.length;n++){
       this.showFire(n)
     }

@@ -1,16 +1,18 @@
 <!--index.wxml-->
 <view>
-  <view class="container">
-    <text id="name">首页</text>
+  <view class="fixed">
+    <view class="shouye-container">
+      <text id="name">首页</text>
+    </view>
+    <view class="shouye-search" bindtap="turnSearch">
+      <input disabled="true"  placeholder="搜索" placeholder-class="place-style iconfont icon-ai219"></input>
+    </view>
   </view>
   <view id="shouye">
-    <view class="shouye-search">
-      <input  bindinput="getInput" placeholder="搜索" placeholder-class="place-style iconfont icon-ai219"></input>
-    </view>
     <view class="shouye-teacher" wx:for="{{kemu}}" wx:for-item="kemuItem">
       <view class="shouye-type">
         <view class="type-kemu">{{kemuItem}}</view>
-        <view class="type-more" bindtap="moreTeacher">更多>></view>
+        <view class="type-more" bindtap="moreTeacher" data-kemu="{{kemuItem}}">更多>></view>
       </view>
       <view class="shouye-show">
         <view class="show-hot"  wx:for="{{teacher}}" wx:for-item="teacherItem" wx:key="{{teacherItem.num}}" >
@@ -25,22 +27,6 @@
       </view>
     </view>
   </view>
-  <!-- <view class="bottom">
-    <view class="bottom-in">
-      <view data-cnum="1" class="{{clicknum==1?'bottom-tab-active':'bottom-tab'}}" bindtap="toShouye">
-        <icon class="iconfont icon-boshimao boticon" ></icon>
-        <text class="bottext">首页</text>
-      </view>
-      <view data-cnum="2" class="{{clicknum==2?'bottom-tab-active':'bottom-tab'}}" bindtap="toBook">
-        <icon class="iconfont icon-shu boticon"></icon>
-        <text class="bottext">书籍</text>
-      </view>
-      <view data-cnum="3" class="{{clicknum==3?'bottom-tab-active':'bottom-tab'}}" bindtap="toMine">
-        <icon class="iconfont icon-wode5 boticon"></icon>
-        <text class="bottext">我的</text>
-      </view>
-    </view>
-  </view> -->
 </view>
 
 

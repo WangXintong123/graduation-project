@@ -21,6 +21,7 @@ Page({
   flagt:false,
   flagb:true
   },
+  //收藏里选择展示教师还是书籍
   getActive:function(e){
     if(e.target.dataset.num==1){
       this.setData({
@@ -39,6 +40,7 @@ Page({
       })
     }
   },
+  //展示火苗
   showFire:function(arg){
     for(var j=0;j<this.data.firesLength;j++){
       this.setData({
@@ -54,10 +56,16 @@ Page({
     }
     
   },
+  //回到上一页
+  back:function(){
+    wx.navigateBack({
+      delta:1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (options) {//展示默认样式
     for(var j=0;j<this.data.like_teacher.length;j++){
       for(var i=0;i<this.data.firesLength;i++){
         this.setData({

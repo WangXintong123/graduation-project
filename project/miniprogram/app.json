@@ -1,7 +1,16 @@
 {
   "pages": [
-    "pages/authorize/authorize",
     "pages/shouye/shouye",
+    "pages/book/bookdetail/bookdetail",
+    "pages/shouye/detail/detail",
+    "pages/mine/remark/remark",
+    "pages/mine/like/like",
+    "pages/mine/mine",
+    "pages/book/list/list",
+    "pages/book/book",
+    "pages/shouye/search/search",
+    "pages/shouye/more/more",
+    
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -16,16 +25,6 @@
     "pages/im/im",
     "pages/im/room/room"
   ],
-  "tabBar": {  
-    "list": [{     
-      "pagePath": "pages/shouye/shouye",      
-      "text": "首页"    
-     }, 
-     {      
-      "pagePath": "pages/index/index",      
-      "text": "index"    
-    }]  
-  },  
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
@@ -33,5 +32,28 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+
+  "tabBar": {  
+    "color": "#a9b7b7",  
+    "selectedColor": "#fa381e",  
+    "borderStyle": "black" ,
+    "list": [{  
+      "selectedIconPath": "./images/shouyeactive.png",  
+      "iconPath": "./images/shouye.png",  
+      "pagePath": "pages/shouye/shouye",  
+      "text": "首页"  
+    }, {  
+      "selectedIconPath": "./images/shuactive.png",  
+      "iconPath": "./images/shu.png",  
+      "pagePath": "pages/book/book",  
+      "text": "书籍"  
+    },{  
+      "selectedIconPath": "./images/wodeactive.png",  
+      "iconPath": "./images/wode.png",  
+      "pagePath": "pages/mine/mine",  
+      "text": "我的"  
+    }
+    ]  
+  } 
 }

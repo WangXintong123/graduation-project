@@ -1,0 +1,64 @@
+<!--miniprogram/pages/shouye/detail/detail.wxml-->
+<view class="like-container fixed">
+  <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
+</view>
+<view class="detail-show">
+ <view class="show-img">
+  <image src="../image/wuzhongxiang.png" mode="scaleToFill" style="width:100%;height:90%"></image>
+  <view style="font-size:35rpx;font-weight: bolder;">{{teacher.name}}</view>
+  <view style="font-size:28rpx;margin-top:10rpx">推荐指数：<text style="color:#fa381e;font-size:40rpx">{{teacher.point}}</text> </view>
+ </view>
+ <view class="show-mess">
+    简介:
+    <view class="jianjie"><text >{{teacher.mess}}</text></view>
+    <view class="detail-book">
+      代表作：
+      <view class="books"><text bindtap="getName" wx:for="{{teacher.books}}">{{item}}</text></view>
+      <view class="detail-like"><icon data-num="1" bindtap="likeChange" class="iconfont icon-xingxing + {{xingclass}}"></icon></view>
+    </view>
+ </view>
+</view>
+<view class="detail-review">
+  <view class="review-choose">
+    <view class="choose-type">
+      <view data-num="1" class="{{aclass}}" bindtap="clickChoose">最热</view>
+      <view data-num="2" class="{{dclass}}" bindtap="clickChoose">最新</view>
+    </view>
+  </view>
+</view>
+<view class="review-out">
+  <view class="review-in" wx:for="{{review}}">
+    <view class="review-user">
+      <view class="user-img"><image src="{{item.img}}" style=" height: 70rpx;width:70rpx;border-radius: 40rpx;"></image></view>
+      <view class="user-name">{{item.name}}</view>
+    </view>
+    <view class="user-point">推荐指数：
+      <view class="point-fires">
+        <icon wx:for="{{item.fires}}" wx:key="{{item.id}}" class='iconfont icon-huomiao + {{item.class}}'  ></icon>
+      </view>
+    </view>
+    <view class="review-word">{{item.word}}</view>
+    <view class="review-bot">
+      <view class="bot-date">{{item.date}}</view>
+      <view data-num="{{item.no}}" class="{{item.zanclass}}" bindtap="zanChange"><icon class="iconfont icon-dianzan"><text>{{item.like}}</text></icon></view>
+    </view>
+  </view>
+  <view class="bd-submit" bindtap="show">发表评论</view>
+</view>
+<view class="write-out" hidden="{{hide}}">
+  <view class="write-inner">
+    <view class="write-off">
+      <icon bindtap="writeOff" class="iconfont icon-guanbi"></icon>
+    </view>
+    <text style="margin-top:40rpx">推荐指数</text>
+    <view class="write-fires">
+      <icon wx:for="{{fires}}" data-num="{{item.name}}" class="iconfont icon-huomiao+{{item.firestyle}}" bindtap="setFires"></icon>
+      <text>{{chose}}</text>
+    </view>
+    <view class="write-word">
+      <textarea bindinput="textBlur" class="word-class" maxlength="-1"></textarea>
+    </view>
+  </view>
+  <!-- <view class="write-sub"></view> -->
+  <button class="write-sub" bindtap="writeSub">发表</button>
+</view>

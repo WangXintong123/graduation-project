@@ -1,12 +1,14 @@
 <!--miniprogram/pages/mine/like/like.wxml-->
-<view class="like-container">
-  <icon class="huitui iconfont icon-arrow-left"></icon>
+<view class="fixed">
+  <view class="like-container">
+    <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
+  </view>
+  <view class="like-type">
+    <view data-num="1" class="like + {{oneclass}}" bindtap="getActive">喜欢的教师</view>
+    <view data-num="2" class="like + {{twoclass}}" bindtap="getActive">喜欢的教材</view>
+  </view>
 </view>
-<view class="like-type">
-  <view data-num="1" class="like + {{oneclass}}" bindtap="getActive">喜欢的教师</view>
-  <view data-num="2" class="like + {{twoclass}}" bindtap="getActive">喜欢的教材</view>
-</view>
-<view>
+<view style="margin-top:200rpx">
   <view class="like-teacher" wx:for="{{like_teacher}}" wx:for-item="lteacherItem" hidden="{{flagt}}">
     <view class="like-pic" >
       <image src="{{lteacherItem.img}}" mode="widthFix"  style='width:180rpx;height:100rpx'/>

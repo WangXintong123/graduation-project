@@ -14,8 +14,17 @@ Page({
     {img:"../image/shuxue.png",name:'《张宇高等数学13讲》',point:8.2,author:'张宇'},    
   ]
   },
-  intoDetail:function(e){
-    console.log(e)
+  //进入书籍页
+  intoBook:function(e){
+    wx.navigateTo({
+      url: '/pages/book/bookdetail/bookdetail',
+    })
+  },
+  //路由会到上一页
+  back:function(){
+    wx.navigateBack({
+      delta:1
+    })
   },
   /**
    * 生命周期函数--监听页面加载

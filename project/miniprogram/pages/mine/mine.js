@@ -7,12 +7,19 @@ Page({
   data: {
 
   },
+  //跳转到我的评论页面
   intoPing:function(e){
-
+    wx.navigateTo({
+      url: '/pages/mine/remark/remark',
+    })
   },
+  //跳转到我的收藏页面
   intoLike:function(e){
-
+    wx.navigateTo({
+      url: '/pages/mine/like/like',
+    })
   },
+  //跳转到我的信息页面
   intoMine:function(e){
 
   },

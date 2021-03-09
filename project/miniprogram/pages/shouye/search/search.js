@@ -6,13 +6,16 @@ Page({
    */
   data: { 
     flag:true,
-    name:'教材'
+    name:'教材',
+    word:''
   },
+  //自制下拉列表
   choseType:function(e){
     this.setData({
       "flag":(this.data.flag?false:true)
     })
   },
+  //选择要搜索的类型
   getName:function(e){
     var str="";
     if(e.target.dataset.name=="j"){
@@ -23,6 +26,12 @@ Page({
     }
     this.setData({
       "name":str
+    })
+  },
+  //获取搜索内容
+  getInput:function(e){
+    this.setData({
+      "word":e.detail.value
     })
   },
   /**

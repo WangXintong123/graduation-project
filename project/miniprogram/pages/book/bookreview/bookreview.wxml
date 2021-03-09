@@ -1,0 +1,3 @@
+<!--miniprogram/pages/book/bookreview/bookreview.wxml-->
+<text bindtap="show">展示</text>
+

@@ -1,23 +1,24 @@
-// miniprogram/pages/shouye/write/write.js
+// miniprogram/pages/book/bookreview/bookreview.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    fires:[
-      {name:0,firestyle:'grayfire'},
-      {name:1,firestyle:'grayfire'},
-      {name:2,firestyle:'grayfire'},
-      {name:3,firestyle:'grayfire'},
-      {name:4,firestyle:'grayfire'}
+    point:[
+      {num:0,name:'知识点覆盖程度',fires:[{name:0,starstyle:'graystar'},{name:1,starstyle:'graystar'},{name:2,starstyle:'graystar'},{name:3,starstyle:'graystar'},{name:4,starstyle:'graystar'}]},
+      {num:1,name:'例题及练习题使用价值',fires:[{name:0,starstyle:'graystar'},{name:1,starstyle:'graystar'},{name:2,starstyle:'graystar'},{name:3,starstyle:'graystar'},{name:4,starstyle:'graystar'}]}
   ],
-    firestyle:'grayfire',
-    text:["不推荐","一般","比较推荐","推荐","强烈推荐"],
+    starstyle:'graystar',
     chose:'',
-    hide:true,
-    text_detail:''
+    hide:false,
+    text_detail:'',
+    firesLength:5,
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   //显示评论遮罩层
   show:function(){
     this.setData({
@@ -36,36 +37,31 @@ Page({
       "hide":true
     })
   },
-  //获取textarea里的内容
+  //获取评论内容
   textBlur:function(e){
     this.setData({
       'text_detail':e.detail.value
     })
     console.log(this.data.text_detail)
   },
-  //点击火苗评分，这里的num可是星星的id可以转化为分数
+  //设置火苗
   setFires:function(e){
     var num=e.currentTarget.dataset.num;
-    var mean=this.data.text[num];
-    for(var i=0;i<this.data.fires.length;i++){
-      if(this.data.fires[i].name<=num){
+    var arg=Math.floor(num/10)
+    var after=Math.floor(num%10)
+    for(var i=0;i<this.data.firesLength;i++){
+      if(this.data.point[arg].fires[i].name<=after){
         this.setData({
-          [`fires[${i}].firestyle`]:'activefire'
+          [`point[${arg}].fires[${i}].starstyle`]:'activestar'
         })
       }
       else{
         this.setData({
-          [`fires[${i}].firestyle`]:'grayfire'
+          [`point[${arg}].fires[${i}].starstyle`]:'graystar'
         })
       }
     }
-    this.setData({
-      "chose":mean
-    })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
 
   },

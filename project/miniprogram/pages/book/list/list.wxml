@@ -1,11 +1,11 @@
 <!--miniprogram/pages/book/list/list.wxml-->
-<view class="list-container">
-  <icon class="huitui iconfont icon-arrow-left"></icon>
+<view class="list-container fixed">
+  <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
   <text>{{book_rank}}</text>
 </view>
 <view class="list-out">
-  <view class="list-one" wx:for="{{list_book}}">
-    <view  class="one-img" bindtap="intoDetail">
+  <view class="list-one" wx:for="{{list_book}}" bindtap="intoBook">
+    <view  class="one-img" >
       <image src="{{item.img}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
     </view>
     <view class="one-another">

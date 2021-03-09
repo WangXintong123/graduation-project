@@ -11,8 +11,11 @@ Page({
     {name:'计算机',src:'./image/shuxue.png', book:[{bname:'《王道数据结构》',point:9.1},{bname:'《王道计算机组成原理》',point:8.5},{bname:'《王道操作系统》',point:8.2}]}
   ]
   },
+  //进入书榜单详情页
   intoDetail:function(){
-    console.log(111)
+    wx.navigateTo({
+      url: '/pages/book/list/list',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

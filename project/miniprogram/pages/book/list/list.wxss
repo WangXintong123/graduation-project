@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 80rpx;
 }
 .list-one{
   width:80%;
@@ -36,6 +37,7 @@
   flex-direction: row;
   border:5px double rgb(255, 222, 222);
   border-radius: 20rpx;
+  background-color: #fff;
 }
 .one-img{
   width:30%;
@@ -67,4 +69,8 @@
 }
 .detail-name text{
   word-break: keep-all;
+}
+.fixed{
+  position: fixed;
+  width:100%;
 }

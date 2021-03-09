@@ -13,49 +13,19 @@ Page({
     firesLength:5,
     clicknum:1
   },
-  //获取搜索内容
-    getInput: function(e){
-    this.setData({
-        message: e.detail.value
-     });
+  //跳转搜索
+    turnSearch: function(e){
+    wx.navigateTo({
+      url: '/pages/shouye/search/search',
+    })
   },
-  //更多老师
-  moreTeacher:function(){
-    console.log("跳转")  
+  //打开更多老师，这里可以获取点击的什么科目的更多老师e.target.dataset.kemu
+  moreTeacher:function(e){
+    wx.navigateTo({   
+      url:"/pages/shouye/more/more"
+ }) 
   },
-  //点击变色
-  // clickTab:function(e){
-  //     //与target有区别
-  //   this.setData({
-  //     clicknum:e.currentTarget.dataset.cnum
-  //   })
-  // },
-  //点击跳转
-  // toShouye:function(e){
-  //   wx.navigateTo({
-  //     url: 'pages/shouye/shouye',
-  //   })
-  //   this.setData({
-  //     clicknum:e.currentTarget.dataset.cnum
-  //   })
-  // },
-  // toBook:function(e){
-  //   wx.navigateTo({
-  //     url: 'pages/index/index',
-  //   })
-  //   this.setData({
-  //     clicknum:e.currentTarget.dataset.cnum
-  //   })
-  // },
-  // toMine:function(e){
-  //   wx.navigateTo({
-  //     url: 'pages/index/index',
-  //   })
-  //   this.setData({
-  //     clicknum:e.currentTarget.dataset.cnum
-  //   })
-  // },
-  //热度火苗
+  //显示每个老师的热度火苗
   showFire:function(arg){
     for(var j=0;j<this.data.firesLength;j++){
       this.setData({
@@ -72,7 +42,7 @@ Page({
     
   },
   onLoad:function(){
-    //更多火苗
+    //更多火苗（也是显示火苗）
     for(var j=0;j<this.data.teacher.length;j++){
       for(var i=0;i<this.data.firesLength;i++){
         this.setData({
@@ -80,6 +50,7 @@ Page({
         })
       }
     }
+    //调用火苗函数
     for(var n=0;n<this.data.teacher.length;n++){
       this.showFire(n)
     }

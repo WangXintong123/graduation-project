@@ -1,11 +1,13 @@
  <!--miniprogram/pages/mine/remark/remark.wxml-->
-<view class="like-container">
-  <icon class="huitui iconfont icon-arrow-left"></icon>
-</view>
-<view class="like-type">
-  <view data-num="1" class="like + {{oneclass}}" bindtap="getActive">教师</view>
-  <view data-num="2" class="like + {{twoclass}}" bindtap="getActive">教材</view>
-</view>
+ <view class="fixed">
+    <view class="like-container">
+    <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
+  </view>
+  <view class="like-type">
+    <view data-num="1" class="like + {{oneclass}}" bindtap="getActive">教师</view>
+    <view data-num="2" class="like + {{twoclass}}" bindtap="getActive">教材</view>
+  </view>
+ </view>
 <view class="review-out">
   <view class="review-one" wx:for="{{arr}}" wx:for-item="titem">
     <view class="review-img">
