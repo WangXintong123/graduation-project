@@ -29,7 +29,7 @@ Page({
                           success: res => {
                             console.log('[云函数] [login] user openid: ', res.result.openid)
                             console.log('调用login云函数返回的res',res)
-                            app.globalData.userId = res.result.openid;
+                            app.globalData.openid = res.result.openid;
                             
                           }
                         })
@@ -72,7 +72,7 @@ Page({
                 this.setData({
                   userId: res._id,
                 });
-                app.globalData.userId=res._openid
+                app.globalData.openid=res._openid
             }
         });
         wx.switchTab({

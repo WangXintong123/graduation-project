@@ -3,6 +3,8 @@ const app = getApp()
 
 Page({
   data: {
+    openid:"",//用户唯一标识
+
     message:'',
     kemu:["数学","英语","政治"],
     teacher:[
@@ -11,7 +13,8 @@ Page({
       {img:'./image/wuzhongxiang.png',name:'武忠祥',hot:59,num:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]}
     ],
     firesLength:5,
-    clicknum:1
+    clicknum:1,
+    
   },
   //跳转搜索
     turnSearch: function(e){
@@ -41,7 +44,77 @@ Page({
     }
     
   },
-  onLoad:function(){
+  onLoad:function(options){
+    /**王丽娜******************************************* */
+    //将用户的唯一标识赋给this.data.openid
+    if (app.globalData.openid) {
+      this.setData({
+        openid: app.globalData.openid
+      })
+    }
+    const db = wx.cloud.database()
+    const _ = db.command
+    // 查询数学教师信息，只显示前三个，并按热度从高到低输出
+    db.collection('teachers').where({
+      subject: _.eq("math")
+    }).orderBy('score', 'asc')
+    .limit(3)
+    .get({
+      success: res => {
+        // this.setData({
+        //   math:res.data
+        // })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+    // 查询英语教师信息，只显示前三个，并按热度从高到低输出
+    db.collection('teachers').where({
+      subject: _.eq("English")
+    }).orderBy('score', 'asc')
+    .limit(3)
+    .get({
+      success: res => {
+        // this.setData({
+        //   English:res.data
+        // })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+    // 查询政治教师信息，只显示前三个，并按热度从高到低输出
+    db.collection('teachers').where({
+      subject: _.eq("politics")
+    }).orderBy('score', 'asc')
+    .limit(3)
+    .get({
+      success: res => {
+        // this.setData({
+        //   politics:res.data
+        // })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+/********************************************************************** */
     //更多火苗（也是显示火苗）
     for(var j=0;j<this.data.teacher.length;j++){
       for(var i=0;i<this.data.firesLength;i++){

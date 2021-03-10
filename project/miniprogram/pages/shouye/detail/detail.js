@@ -1,4 +1,5 @@
 // miniprogram/pages/shouye/detail/detail.js
+const app = getApp()
 Page({
 
   /**
@@ -6,6 +7,8 @@ Page({
    */
   //最热最新功能没写，需要接口
   data: {
+    openid:"",//用户唯一标识
+
     teacher:{name:'武忠祥',point:9.6,mess:'武忠祥从事高等数学教学和考研辅导24年，国家高等数学试题库骨干专家，多次参加考研数学大纲修订及全国性数学考试命题工作。高教版工科教材编写者。考研历年真题研究骨干专家。武忠祥从事高等数学教学和考研辅导24年，国家高等数学试题库骨干专家',books:["《数学考研历年真题分类解析》","《大学数学教程》","《高等数学典型题》","《高等数学辅导讲义》"]},
     xingclass:'dactive',
     tag:false,
@@ -161,6 +164,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {//显示一些样式包括火苗，星星，大拇指
+    /****************************************************** */
+    //将用户的唯一标识赋给this.data.openid
+    if (app.globalData.openid) {
+      this.setData({
+        openid: app.globalData.openid
+      })
+    }
+
+    wx.cloud.callFunction({
+      name:'lookup',
+      data:{
+        collection:'books',
+        from:'teachers',
+        localField:'_id',
+        foreignField:'book.bookid',
+        as:'teacherList',
+        match:{_id:"zhangyu1"}
+      },
+      success:res=>{
+        console.log(res.result.list)
+      }
+    })
+
+    // const db = wx.cloud.database()
+    // const $= db.command.aggregate
+    // const _= db.command
+    // // 查询教师的详细信息，以及评论
+    // db.collection('books').aggregate()
+    // .lookup({
+    //   from: 'teachers',
+    //   pipeline: $.pipeline()
+    //   .done(),
+    //   as: 'list',
+    // })
+    // .match({
+    //   _id:"zhangyu1"
+    // })
+    // .end()
+    // .then(res => console.log(res))
+    // .catch(err => console.error(err))
+    
+/********************************************************** */
+
+
+
+
     if(!this.data.tag){
       this.setData({
         "xingclass":"dactive",
