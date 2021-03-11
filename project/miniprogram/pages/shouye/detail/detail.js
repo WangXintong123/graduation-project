@@ -55,6 +55,52 @@ Page({
         "tag":false,
       })
     }
+    /************************************* ************/
+    //点击收藏添加到数据库（先判断tag值，若为false，则执行此代码）
+    // const db = wx.cloud.database();
+    // const _=db.command;
+    // db.collection('favor').add({
+    //   data: {
+    //     name:"教师的id",
+    //     userid:this.data.openid,
+    //     type:'teacher'
+    //   },
+    //   success: res => {
+    //     // 在返回结果中会包含新创建的记录的 _id
+    //     // this.setData({
+    //     //   tag:true//将收藏标识设为true
+    //     // })
+    //     wx.showToast({
+    //       title: '收藏成功',
+    //     })
+    //     console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+    //   },
+    //   fail: err => {
+    //     wx.showToast({
+    //       icon: 'none',
+    //       title: '收藏失败'
+    //     })
+    //     console.error('[数据库] [新增记录] 失败：', err)
+    //   }
+    // })
+   //再次点击收藏，删除收藏记录（先判断tag值，若为true，则执行此代码）
+    // db.collection('favor').where({
+    //   userid:_.eq(this.data.openid),
+    //   name:_.eq('教师的id')
+    // }).remove({
+    //   success: res => {
+    //     wx.showToast({
+    //       title: '取消收藏',
+    //     })
+    //     // this.setData({
+    //     //   tag:false//将收藏标识设为false
+    //     // })
+    //   },
+    //   fail: err => {
+    //     console.error('取消收藏失败：', err)
+    //   }
+    // })
+    /************************************************************** */
   },
   //改变最新或最热样式
   clickChoose:function(e){
@@ -70,6 +116,30 @@ Page({
         'dclass':'type-a'
       })
     }
+    /********************************************* */
+    //点击最热或最新，更改评论内容
+    
+    // wx.cloud.callFunction({
+    //   name:'lookup',
+    //   data:{
+    //     collection:'teacher-comments',
+    //     from:'users',
+    //     localField:'userid',
+    //     foreignField:'_openid',
+    //     as:'userList',//userList里存储着发表评论的用户的头像、昵称
+    //     match:{teacherid:"教师id"},
+    //     sort:{support:-1}//默认打开按照支持数从高到低显示，若点击最新，则将'support'改成'time'，即要设成变量，点击事件绑定setdata，来改变变量值
+    //   },
+    //   success:res=>{
+    //     // this.setData({
+    //     //   list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+    //     // })
+    //     console.log(res.result.list)
+    //   }
+    // })
+
+    /*********************************************************** */
+
   },
   //显示火苗热度
   showFire:function(arg){
@@ -114,6 +184,23 @@ Page({
         })
       }
     }
+  /*********************************************** */
+    //点赞或取消更新数据库
+    // db.collection('teacher-comments').doc('此处值为点击的评论的独有_id').update({
+    //   data: {
+    //     support: '将新的点赞数赋到这里'
+    //   },
+    //   success: res => {
+    //     // this.setData({
+    //     //   //在这里重新渲染
+    //     // })
+    //   },
+    //   fail: err => {
+    //     icon: 'none',
+    //     console.error('[数据库] [更新记录] 失败：', err)
+    //   }
+    // })
+    /**************************************************** */
   },
   //打开评论遮罩层
   show:function(){
@@ -172,38 +259,65 @@ Page({
       })
     }
 
-    wx.cloud.callFunction({
-      name:'lookup',
-      data:{
-        collection:'books',
-        from:'teachers',
-        localField:'_id',
-        foreignField:'book.bookid',
-        as:'teacherList',
-        match:{_id:"zhangyu1"}
+    const db = wx.cloud.database()
+    const _ = db.command
+    // 获得教师的信息
+    db.collection('teachers').where({
+      _id: _.eq("zhangyu")//根据前面的路由提供参数，获得对应的教师的_id
+    })
+    .get({
+      success: res => {
+        // this.setData({
+        //   teacher:res.data 
+        // })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
       },
-      success:res=>{
-        console.log(res.result.list)
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '信息加载失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
       }
     })
 
-    // const db = wx.cloud.database()
-    // const $= db.command.aggregate
-    // const _= db.command
-    // // 查询教师的详细信息，以及评论
-    // db.collection('books').aggregate()
-    // .lookup({
-    //   from: 'teachers',
-    //   pipeline: $.pipeline()
-    //   .done(),
-    //   as: 'list',
+
+    //评论加载
+    // wx.cloud.callFunction({
+    //   name:'lookup',
+    //   data:{
+    //     collection:'teacher-comments',
+    //     from:'users',
+    //     localField:'userid',
+    //     foreignField:'_openid',
+    //     as:'userList',//userList里存储着发表评论的用户的头像、昵称
+    //     match:{teacherid:"教师id"},
+    //     sort:{support:-1}//默认打开按照支持数从高到低显示
+    //   },
+    //   success:res=>{
+    //     // this.setData({
+    //     //   list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+    //     // })
+    //     console.log(res.result.list)
+    //   }
     // })
-    // .match({
-    //   _id:"zhangyu1"
+    
+    //判断是否收藏
+    // db.collection('favor').where({
+    //   name:_.eq('教师id'),//点击进入详情页时，获得教师id
+    //   userid:_.eq(this.data.openid)
+    // }).get({
+    //   success: res => {
+    //     this.setData({
+    //       tag:res.data.length===0?false:true
+    //     })
+    //     console.log('[数据库] [查询记录] 成功: ', res.data)
+    //   },
+    //   fail: err => {
+    //     console.error('[数据库] [查询记录] 失败：', err)
+    //   }
     // })
-    // .end()
-    // .then(res => console.log(res))
-    // .catch(err => console.error(err))
+    
     
 /********************************************************** */
 

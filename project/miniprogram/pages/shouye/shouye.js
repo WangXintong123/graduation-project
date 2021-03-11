@@ -57,7 +57,7 @@ Page({
     // 查询数学教师信息，只显示前三个，并按热度从高到低输出
     db.collection('teachers').where({
       subject: _.eq("math")
-    }).orderBy('score', 'asc')
+    }).orderBy('score', 'desc')
     .limit(3)
     .get({
       success: res => {
@@ -69,7 +69,7 @@ Page({
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '加载失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
       }
@@ -77,7 +77,7 @@ Page({
     // 查询英语教师信息，只显示前三个，并按热度从高到低输出
     db.collection('teachers').where({
       subject: _.eq("English")
-    }).orderBy('score', 'asc')
+    }).orderBy('score', 'desc')
     .limit(3)
     .get({
       success: res => {
@@ -89,7 +89,7 @@ Page({
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '加载失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
       }
@@ -97,7 +97,7 @@ Page({
     // 查询政治教师信息，只显示前三个，并按热度从高到低输出
     db.collection('teachers').where({
       subject: _.eq("politics")
-    }).orderBy('score', 'asc')
+    }).orderBy('score', 'desc')
     .limit(3)
     .get({
       success: res => {
@@ -109,7 +109,7 @@ Page({
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '加载失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
       }

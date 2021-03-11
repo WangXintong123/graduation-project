@@ -61,7 +61,7 @@ Page({
     // 查询对应科目教师信息，并按热度从高到低输出
     db.collection('teachers').where({
       subject: _.eq("math")//math可更改，还可以是English、politics，根据前面的路由提供参数，获得对应的科目类型
-    }).orderBy('score', 'asc')
+    }).orderBy('score', 'desc')
     .get({
       success: res => {
         // this.setData({
@@ -72,7 +72,7 @@ Page({
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '加载失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
       }

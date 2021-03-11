@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
       as: event.as
     })
     .match(event.match)
+    .sort(event.sort)
     .end()
   } catch (e) {
     console.error(e)

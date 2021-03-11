@@ -7,7 +7,8 @@ Page({
   data: { 
     flag:true,
     name:'教材',
-    word:''
+    word:'',
+    list:''
   },
   //自制下拉列表
   choseType:function(e){
@@ -34,6 +35,60 @@ Page({
       "word":e.detail.value
     })
   },
+
+  /***************************************************** */
+  //显示搜索内容(当用户点击确定搜索时调用此函数，所以可以再写一个确定搜索的按钮，或者能够获取到用户键盘的确定键，当按下手机键盘的确定调用此函数)
+  search:function(){
+    const db = wx.cloud.database()
+    const _ = db.command
+    if(this.data.name==="老师"){
+      db.collection('teachers').where({
+        teachername: db.RegExp({
+          regexp: this.data.word,//搜索的关键字
+          options: 'i',
+        })
+      })
+      .get({
+        success: res => {
+          // this.setData({
+          //   list:res.data 
+          // })
+          console.log('[数据库] [查询记录] 成功: ', res.data)
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '暂无信息'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })
+    }else{
+      db.collection('books').where({
+        bookname: db.RegExp({
+          regexp: this.data.word,//搜索的关键字
+          options: 'i',
+        })
+      })
+      .get({
+        success: res => {
+          // this.setData({
+          //   list:res.data 
+          // })
+          console.log('[数据库] [查询记录] 成功: ', res.data)
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '暂无信息'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })
+    }
+    
+  },
+/****************************************************************** */
   /**
    * 生命周期函数--监听页面加载
    */
