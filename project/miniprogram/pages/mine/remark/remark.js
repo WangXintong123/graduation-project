@@ -1,10 +1,14 @@
 // miniprogram/pages/mine/remark/remark.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    openid:"",//用户唯一标识
+
+
     firesLength:5,
     oneclass:'active',
     twoclass:'',
@@ -62,6 +66,27 @@ Page({
         this.showFire(n)
       }
     }
+    /*************************************************** */
+    //切换教师教材按钮展示不同的数据库数据
+    const db = wx.cloud.database()
+    const _ = db.command
+    // 查询用户发表的评论，默认先展示对教师的评论
+    // wx.cloud.callFunction({
+    //   name:'limit',
+    //   data:{
+    //     collection:'teacher-comments',//若是查教材，值为'book-comments'
+    //     where:{userid:this.data.openid},
+    //     type:'time', 
+    //     order:'desc'
+    //   },
+    //   success:res=>{
+    //     // this.setData({
+    //     //   review:res.result.data 
+    //     // })
+    //     console.log(res.result.data)
+    //   }
+    // })
+    /******************************************************** */
   },
   //显示评分星星火苗
   showFire:function(arg){
@@ -84,7 +109,65 @@ Page({
       delta:1
     })
   },
+  /************************************************ */
+  //删除评论，更新数据库，同时重新渲染页面，此函数应绑定在每条评论的删除按钮上
+  delete:function(e){
+    const db = wx.cloud.database()
+    const _ = db.command
+    db.collection('此处值为数据库名，若删除教材评论，值为book-comments，若是教师，值为teacher-comments').doc('值为此条评论的_id,每一条评论都有唯一的_id,是添加评论时，数据库自动加上的').remove({
+      success: res => {
+        wx.cloud.callFunction({
+          name:'limit',
+          data:{
+            collection:'teacher-comments',//若是查教材，值为'book-comments'
+            where:{userid:this.data.openid},
+            type:'time', 
+            order:'desc'
+          },
+          success:res=>{
+            // this.setData({
+            //   review:res.result.data 
+            // })
+            console.log(res.result.data)
+          }
+        })
+      },
+      fail: err => {
+        console.error('删除评论失败：', err)
+      }
+    })
+  },
+    /************************************************** */
   onLoad: function (e) {//展示默认样式
+/******************************************************** */
+//将用户的唯一标识赋给this.data.openid
+    if (app.globalData.openid) {
+      this.setData({
+        openid: app.globalData.openid
+      })
+    }
+    const db = wx.cloud.database()
+    const _ = db.command
+    // 查询用户发表的评论，默认先展示对教师的评论
+    // wx.cloud.callFunction({
+    //   name:'limit',
+    //   data:{
+    //     collection:'teacher-comments',
+    //     where:{userid:this.data.openid},
+    //     type:'time', 
+    //     order:'desc'
+    //   },
+    //   success:res=>{
+    //     // this.setData({
+    //     //   review:res.result.data 
+    //     // })
+    //     console.log(res.result.data)
+    //   }
+    // })
+/************************************************* */
+
+
+
     for(var k=0;k<this.data.t_review.length;k++){
       this.setData({
         [`arr[${k}]`]:this.data.t_review[k]

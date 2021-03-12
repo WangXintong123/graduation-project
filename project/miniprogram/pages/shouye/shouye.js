@@ -45,7 +45,18 @@ Page({
     
   },
   onLoad:function(options){
-    /**王丽娜******************************************* */
+    /********************************************* */
+    //获取用户的openid
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        console.log('调用login云函数返回的res',res)
+        app.globalData.openid = res.result.openid;
+        
+      }
+    })
     //将用户的唯一标识赋给this.data.openid
     if (app.globalData.openid) {
       this.setData({

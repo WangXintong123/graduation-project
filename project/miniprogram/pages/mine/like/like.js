@@ -1,10 +1,15 @@
 // miniprogram/pages/mine/like/like.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    openid:"",//用户唯一标识
+
+
+
    oneclass:'active',
    twoclass:'',
    like_teacher:[{img:'../image/wuzhongxiang.png',name:'张宇',hot:90,num:0,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
@@ -39,6 +44,27 @@ Page({
         "flagb":false,
       })
     }
+    /*************************************************** */
+    //切换教师教材按钮展示不同的数据库数据
+    const db = wx.cloud.database()
+    const _ = db.command
+    // 查询用户的收藏列表
+    wx.cloud.callFunction({
+      name:'limit',
+      data:{
+        collection:'favor',
+        where:{userid:this.data.openid,type:'teacher'},//若是查教材，type值为'book'
+        type:'time', 
+        order:'desc'
+      },
+      success:res=>{
+        // this.setData({
+        //   like:res.result.data 
+        // })
+        console.log(res.result.data)
+      }
+    })
+    /******************************************************** */
   },
   //展示火苗
   showFire:function(arg){
@@ -62,10 +88,66 @@ Page({
       delta:1
     })
   },
+  //取消收藏，更新数据库，同时重新渲染页面，此函数应绑定在每个取消收藏按钮上
+  delete:function(e){
+    const db = wx.cloud.database()
+    const _ = db.command
+    db.collection('favor').doc('值为此条收藏信息的_id,每一条收藏信息都有唯一的_id,是添加评论时，数据库自动加上的').remove({
+      success: res => {
+        wx.cloud.callFunction({
+          name:'limit',
+          data:{
+            collection:'favor',
+            where:{userid:this.data.openid,type:'teacher'},//若是查教材，type值为'book'
+            type:'time', 
+            order:'desc'
+          },
+          success:res=>{
+            // this.setData({
+            //   like:res.result.data 
+            // })
+            console.log(res.result.data)
+          }
+        })
+      },
+      fail: err => {
+        console.error('取消收藏失败：', err)
+      }
+    })
+  },
+    /************************************************** */
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {//展示默认样式
+/******************************************************** */
+//将用户的唯一标识赋给this.data.openid
+    if (app.globalData.openid) {
+      this.setData({
+        openid: app.globalData.openid
+      })
+    }
+    const db = wx.cloud.database()
+    const _ = db.command
+// 查询用户的收藏列表，默认先展示收藏的老师列表
+    wx.cloud.callFunction({
+      name:'limit',
+      data:{
+        collection:'favor',
+        where:{userid:this.data.openid,type:'teacher'},
+        type:'time', 
+        order:'desc'
+      },
+      success:res=>{
+        // this.setData({
+        //   like:res.result.data 
+        // })
+        console.log(res.result.data)
+      }
+    })
+    /******************************************************** */
+
+
     for(var j=0;j<this.data.like_teacher.length;j++){
       for(var i=0;i<this.data.firesLength;i++){
         this.setData({

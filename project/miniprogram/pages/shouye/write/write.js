@@ -39,6 +39,7 @@ Page({
       "hide":true
     })
 
+
     /***************************************************** */
     //将评论添加到数据库
     // const db = wx.cloud.database();
@@ -129,7 +130,7 @@ Page({
         openid: app.globalData.openid
       })
     }
- 
+    console.log(this.data.openid)
 /********************** */
 
   },
@@ -145,7 +146,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
