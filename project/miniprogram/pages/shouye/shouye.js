@@ -4,7 +4,7 @@ const app = getApp()
 Page({
   data: {
     openid:"",//用户唯一标识
-
+    math:"",
     message:'',
     kemu:["数学","英语","政治"],
     teacher:[
@@ -72,9 +72,11 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   math:res.data
-        // })
+        this.setData({
+          math:res.data
+        },function(){
+          console.log(this.data.math)
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
