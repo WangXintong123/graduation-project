@@ -11,16 +11,17 @@
   <view id="shouye">
     <view class="shouye-teacher" wx:for="{{kemu}}" wx:for-item="kemuItem">
       <view class="shouye-type">
-        <view class="type-kemu">{{kemuItem}}</view>
-        <view class="type-more" bindtap="moreTeacher" data-kemu="{{kemuItem}}">更多>></view>
+        <view class="type-kemu">{{kemuItem.subject}}</view>
+        <view class="type-more" bindtap="moreTeacher" data-kemu="{{kemuItem.subject}}">更多>></view>
       </view>
       <view class="shouye-show">
-        <view class="show-hot"  wx:for="{{teacher}}" wx:for-item="teacherItem" wx:key="{{teacherItem.num}}" >
+        <view class="show-hot"  wx:for="{{kemuItem.text}}" wx:for-item="teacherItem"  >
           <view class="hot-pic">
-            <image src="{{teacherItem.img}}" mode="widthFix"  style='width:150rpx;height:100rpx'/>
+            <image src="{{teacherItem.teacherimg}}" mode="scaleToFill"  style='width:150rpx;height:200rpx' data-name="{{teacherItem._id}}" bindtap="gotoDetail"/>
           </view>
-          <view class="hot-name">{{teacherItem.name}}</view>
-          <view class="hot-fire" id="hotfire{{teacherItem.num}}">
+          <view class="hot-name">{{teacherItem.teachername}}</view>
+          <view class="hot-fire" >
+          <!-- id="hotfire{{teacherItem.num}}" -->
            <icon wx:for="{{teacherItem.fires}}" wx:key="{{item.id}}" class='iconfont icon-huomiao + {{item.class}}'  ></icon>
           </view>
         </view>

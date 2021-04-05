@@ -4,12 +4,12 @@
   <text>{{arg_kemu}}</text>
 </view>
 <view style="margin-top:80rpx">
-  <view class="more-teacher" wx:for="{{more_teacher}}" wx:for-item="mteacherItem" bindtap="intoDetail">
+  <view class="more-teacher" wx:for="{{more_teacher}}" wx:for-item="mteacherItem" data-name="{{mteacherItem._id}}" bindtap="intoDetail">
     <view class="more-pic">
-      <image src="{{more_teacher[0].img}}" mode="widthFix"  style='width:210rpx;height:120rpx'/>
+      <image src="{{mteacherItem.teacherimg}}" mode="scaleToFillx"  style='width:220rpx;height:300rpx'/>
     </view>
     <view class="more-mess">
-      <text style="font-size:35rpx">{{more_teacher[0].name}}</text>
+      <text style="font-size:35rpx">{{mteacherItem.teachername}}</text>
       <view class="more-fire">
         <icon wx:for="{{mteacherItem.fires}}" wx:key="{{item.id}}" class='iconfont icon-huomiao + {{item.class}}'  ></icon>
       </view>

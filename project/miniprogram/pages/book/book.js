@@ -7,17 +7,13 @@ Page({
    */
   data: {
     openid:"",//用户唯一标识
-
-    kemu:[{name:'数学',src:'./image/shuxue.png',book:[{bname:'《张宇高等数学18讲》',point:9.6},{bname:'《张宇线性代数18讲》',point:9.5},{bname:'《张宇概率18讲》',point:9.2}]},
-    {name:'英语',src:'./image/shuxue.png',book:[{bname:'《考研真相》',point:9.7},{bname:'《语法的逻辑》',point:9.1},{bname:'《阅读的逻辑》',point:8.9}]},
-    {name:'政治',src:'./image/shuxue.png',book:[{bname:'《肖秀荣4套卷》',point:9.9},{bname:'《肖秀荣8套卷》',point:9.6},{bname:'《肖秀荣1000题》',point:9.4}]},
-    {name:'计算机',src:'./image/shuxue.png', book:[{bname:'《王道数据结构》',point:9.1},{bname:'《王道计算机组成原理》',point:8.5},{bname:'《王道操作系统》',point:8.2}]}
-  ]
+    kemu:[{subject:"",book:""},{subject:"英语",book:""},{subject:"政治",book:""}]
   },
   //进入书榜单详情页
-  intoDetail:function(){
+  intoDetail:function(e){
+    var sub=e.currentTarget.dataset.sub
     wx.navigateTo({
-      url: '/pages/book/list/list',
+      url: `/pages/book/list/list?sub=${sub}`,
     })
   },
   /**
@@ -40,9 +36,9 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   math:res.data
-        // })
+        this.setData({
+          'kemu[0].book':res.data
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
@@ -60,9 +56,9 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   English:res.data
-        // })
+        this.setData({
+          'kemu[1].book':res.data
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
@@ -80,9 +76,11 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   politics:res.data
-        // })
+        this.setData({
+          'kemu[2].book':res.data
+        },function(){
+          console.log(this.data.kemu)
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {

@@ -1,17 +1,17 @@
 <!--miniprogram/pages/book/list/list.wxml-->
 <view class="list-container fixed">
   <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
-  <text>{{book_rank}}</text>
+  <!-- <text>{{book_rank}}</text> -->
 </view>
 <view class="list-out">
-  <view class="list-one" wx:for="{{list_book}}" bindtap="intoBook">
+  <view class="list-one" wx:for="{{list_book}}" bindtap="intoBook" data-_id="{{item._id}}">
     <view  class="one-img" >
-      <image src="{{item.img}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
+      <image src="{{item.bookimg}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
     </view>
     <view class="one-another">
-      <view class="another-detail">书名:<view class="detail-name"><text>{{item.name}}</text></view></view>
-      <view class="another-detail">评分:<view style="margin-left:15rpx;color:#fa381e;font-size:40rpx">{{item.point}}</view></view>
-      <view class="another-detail">作者:<view style="margin-left:15rpx">{{item.author}}</view></view>
+      <view class="another-detail">书名:<view class="detail-name"><text>《{{item.bookname}}》</text></view></view>
+      <view class="another-detail">评分:<view style="margin-left:15rpx;color:#fa381e;font-size:40rpx">{{item.bookrating.score}}</view></view>
+      <view class="another-detail">作者:<view style="margin-left:15rpx">{{item.writer}}</view></view>
       
     </view>
   </view>

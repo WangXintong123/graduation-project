@@ -4,14 +4,8 @@ const app = getApp()
 Page({
   data: {
     openid:"",//用户唯一标识
-    math:"",
     message:'',
-    kemu:["数学","英语","政治"],
-    teacher:[
-      {img:'./image/wuzhongxiang.png',name:'张宇',hot:90,num:0,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-      {img:'./image/wuzhongxiang.png',name:'汤家凤',hot:79,num:1,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-      {img:'./image/wuzhongxiang.png',name:'武忠祥',hot:59,num:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]}
-    ],
+    kemu:[{subject:'数学',text:""},{subject:'英语',text:""},{subject:'政治',text:""}],
     firesLength:5,
     clicknum:1,
     
@@ -22,27 +16,43 @@ Page({
       url: '/pages/shouye/search/search',
     })
   },
+  //进入老师详情
+  gotoDetail:function(e){
+    var name=e.target.dataset.name
+    console.log(name)
+    wx.navigateTo({
+      url: `/pages/shouye/detail/detail?name=${name}`,
+    })
+  },
   //打开更多老师，这里可以获取点击的什么科目的更多老师e.target.dataset.kemu
   moreTeacher:function(e){
+    var kemu=e.target.dataset.kemu
+    // console.log(e.target.dataset.kemu)
     wx.navigateTo({   
-      url:"/pages/shouye/more/more"
+      url:`/pages/shouye/more/more?kemu=${kemu}`
  }) 
   },
   //显示每个老师的热度火苗
   showFire:function(arg){
-    for(var j=0;j<this.data.firesLength;j++){
-      this.setData({
-        [`teacher[${arg}].fires[${j}].class`]:'grayfire'
-      })
-    }
+    // console.log(arg)
+    // console.log(this.data.kemu[arg].text.length)
+    for(var k=0;k<this.data.kemu[arg].text.length;k++){
       for(var j=0;j<this.data.firesLength;j++){
-        if (this.data.teacher[arg].fires[j].id<=Math.floor(this.data.teacher[arg].hot/20)){
+        this.setData({
+        [`kemu[${arg}].text[${k}].fires[${j}].class`]:'grayfire'
+      })
+      }
+    }
+    for(var k=0;k<this.data.kemu[arg].text.length;k++){
+      // console.log(this.data.kemu[arg].text[k].score)
+      for(var j=0;j<this.data.firesLength;j++){
+        if (this.data.kemu[arg].text[k].fires[j].id<=Math.floor(this.data.kemu[arg].text[k].score/2)){
           this.setData({
-            [`teacher[${arg}].fires[${j}].class`]:'redfire'
+            [`kemu[${arg}].text[${k}].fires[${j}].class`]:'redfire'
           })
         }
+      }
     }
-    
   },
   onLoad:function(options){
     /********************************************* */
@@ -73,18 +83,27 @@ Page({
     .get({
       success: res => {
         this.setData({
-          math:res.data
+          'kemu[0].text':res.data
         },function(){
-          console.log(this.data.math)
+          //更多火苗（也是显示火苗）
+          for(var k=0;k<this.data.kemu[0].text.length;k++){
+            for(var i=0;i<this.data.firesLength;i++){
+              this.setData({
+                [`kemu[0].text[${k}].fires[${i}].class`]:'grayfire'
+              })
+            }
+          }
+          //调用火苗函数
+          this.showFire(0)
         })
-        console.log('[数据库] [查询记录] 成功: ', res.data)
+        // console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
           title: '加载失败'
         })
-        console.error('[数据库] [查询记录] 失败：', err)
+        // console.error('[数据库] [查询记录] 失败：', err)
       }
     })
     // 查询英语教师信息，只显示前三个，并按热度从高到低输出
@@ -94,9 +113,20 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   English:res.data
-        // })
+        this.setData({
+          'kemu[1].text':res.data
+        },function(){
+          //更多火苗（也是显示火苗）
+          for(var k=0;k<this.data.kemu[1].text.length;k++){
+            for(var i=0;i<this.data.firesLength;i++){
+              this.setData({
+                [`kemu[1].text[${k}].fires[${i}].class`]:'grayfire'
+              })
+            }
+          }
+          //调用火苗函数
+          this.showFire(1)
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
@@ -104,7 +134,7 @@ Page({
           icon: 'none',
           title: '加载失败'
         })
-        console.error('[数据库] [查询记录] 失败：', err)
+        // console.error('[数据库] [查询记录] 失败：', err)
       }
     })
     // 查询政治教师信息，只显示前三个，并按热度从高到低输出
@@ -114,32 +144,31 @@ Page({
     .limit(3)
     .get({
       success: res => {
-        // this.setData({
-        //   politics:res.data
-        // })
-        console.log('[数据库] [查询记录] 成功: ', res.data)
+        this.setData({
+          'kemu[2].text':res.data
+        },function(){
+          //更多火苗（也是显示火苗）
+          for(var k=0;k<this.data.kemu[2].text.length;k++){
+            for(var i=0;i<this.data.firesLength;i++){
+              this.setData({
+                [`kemu[2].text[${k}].fires[${i}].class`]:'grayfire'
+              })
+            }
+          }
+          //调用火苗函数
+          this.showFire(2)
+        })
+        // console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
           title: '加载失败'
         })
-        console.error('[数据库] [查询记录] 失败：', err)
+        // console.error('[数据库] [查询记录] 失败：', err)
       }
     })
 /********************************************************************** */
-    //更多火苗（也是显示火苗）
-    for(var j=0;j<this.data.teacher.length;j++){
-      for(var i=0;i<this.data.firesLength;i++){
-        this.setData({
-          [`teacher[${j}].fires[${i}].class`]:'grayfire'
-        })
-      }
-    }
-    //调用火苗函数
-    for(var n=0;n<this.data.teacher.length;n++){
-      this.showFire(n)
-    }
   }
 })
 

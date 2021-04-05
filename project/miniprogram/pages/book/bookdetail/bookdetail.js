@@ -9,12 +9,12 @@ Page({
     openid:"",//用户唯一标识
 
 
-    book:{img:"../image/shuxue.png",name:'《张宇高等数学18讲》',kemu:'数学',author:'张宇',
-    point:[
-      {name:'知识点覆盖程度',number:8,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-      {name:'例题及练习题使用价值',number:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-    ]
-  },
+  //   book:{img:"../image/shuxue.png",name:'《张宇高等数学18讲》',kemu:'数学',author:'张宇',
+  //   point:[
+  //     {name:'知识点覆盖程度',number:8,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
+  //     {name:'例题及练习题使用价值',number:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
+  //   ]
+  // },
     point:[
       {num:0,name:'知识点覆盖程度',fires:[{name:0,starstyle:'graystar'},{name:1,starstyle:'graystar'},{name:2,starstyle:'graystar'},{name:3,starstyle:'graystar'},{name:4,starstyle:'graystar'}]},
       {num:1,name:'例题及练习题使用价值',fires:[{name:0,starstyle:'graystar'},{name:1,starstyle:'graystar'},{name:2,starstyle:'graystar'},{name:3,starstyle:'graystar'},{name:4,starstyle:'graystar'}]}
@@ -120,19 +120,25 @@ Page({
     /************************************************************** */
   },
   //展示火苗
-  showFire:function(arg){
+  showFire:function(){
     for(var j=0;j<this.data.firesLength;j++){
       this.setData({
-        [`book.point[${arg}].fires[${j}].class`]:'graystars'
+        [`book[0].bookrating.cover.fires[${j}].class`]:'graystars',
+        [`book[0].bookrating.exercise.fires[${j}].class`]:'graystars'
       })
     }
       for(var j=0;j<this.data.firesLength;j++){
-        if (this.data.book.point[arg].fires[j].id<=Math.floor(this.data.book.point[arg].number/2)){
+        if (this.data.book[0].bookrating.cover.fires[j].id<=Math.floor(this.data.book[0].bookrating.cover.num/2)){
           this.setData({
-            [`book.point[${arg}].fires[${j}].class`]:'redstars'
+            [`book[0].bookrating.cover.fires[${j}].class`]:'redstars'
           })
         }
-    }
+        if (this.data.book[0].bookrating.exercise.fires[j].id<=Math.floor(this.data.book[0].bookrating.exercise.num/2)){
+          this.setData({
+            [`book[0].bookrating.exercise.fires[${j}].class`]:'redstars'
+          })
+        }
+      }
   },
   //展示评论里的火苗
   reviewshowFire:function(arg){
@@ -277,46 +283,46 @@ Page({
             },
             score:'此处为以上两个评分的平均值，类型应为number'
         },
-    //     content:'评论内容',
-    //     support:0,//一开始点赞数为0
-    //     image:'书籍的图片',
-		//     date:now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日',
-    //     time: now.getTime(),
+        content:'评论内容',
+        support:0,//一开始点赞数为0
+        image:'书籍的图片',
+		    date:now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日',
+        time: now.getTime(),
 
-    //   },
-    //   success: res => {
-    //     // 创建成功后重新渲染评论列表
-    //     wx.cloud.callFunction({
-    //       name:'lookup',
-    //       data:{
-    //         collection:'book-comments',
-    //         from:'users',
-    //         localField:'userid',
-    //         foreignField:'_openid',
-    //         as:'userList',//userList里存储着发表评论的用户的头像、昵称
-    //         match:{bookid:"书籍id"},
-    //         sort:{support:-1}//若此时按最新展示，则将'support'改成'time'，即要设成变量
-    //       },
-    //       success:res=>{
-    //         // this.setData({
-    //         //   list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
-    //         // })
-    //         console.log(res.result.list)
-    //       }
-    //     })
-    //     wx.showToast({
-    //       title: '发表成功',
-    //     })
-    //     console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
-    //   },
-    //   fail: err => {
-    //     wx.showToast({
-    //       icon: 'none',
-    //       title: '发表失败'
-    //     })
-    //     console.error('[数据库] [新增记录] 失败：', err)
-    //   }
-    // })
+      },
+      success: res => {
+        // 创建成功后重新渲染评论列表
+        wx.cloud.callFunction({
+          name:'lookup',
+          data:{
+            collection:'book-comments',
+            from:'users',
+            localField:'userid',
+            foreignField:'_openid',
+            as:'userList',//userList里存储着发表评论的用户的头像、昵称
+            match:{bookid:"书籍id"},
+            sort:{support:-1}//若此时按最新展示，则将'support'改成'time'，即要设成变量
+          },
+          success:res=>{
+            // this.setData({
+            //   list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+            // })
+            console.log(res.result.list)
+          }
+        })
+        wx.showToast({
+          title: '发表成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '发表失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
     /************************************************************** */
   },
   //获取评论内容
@@ -366,13 +372,21 @@ Page({
     const _ = db.command
     // 获得书籍的信息
     db.collection('books').where({
-      _id: _.eq("zhangyu1")//根据前面的路由提供参数，获得对应的书籍的_id
+      _id: _.eq(options.id)//根据前面的路由提供参数，获得对应的书籍的_id
     })
     .get({
       success: res => {
-        // this.setData({
-        //   book:res.data 
-        // })
+        this.setData({
+          book:res.data 
+        },function(){
+          for(var i=0;i<this.data.firesLength;i++){
+            this.setData({
+              [`book[0].boookrating.cover.fires[${i}].class`]:'graystars',
+              [`book[0].boookrating.exercise.fires[${i}].class`]:'graystars'
+            })
+          }
+          this.showFire()
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
@@ -434,16 +448,16 @@ Page({
         "tag":true,
       })
   }
-  for(var j=0;j<this.data.book.point.length;j++){
-    for(var i=0;i<this.data.firesLength;i++){
-      this.setData({
-        [`book.point[${j}].fires[${i}].class`]:'graystars'
-      })
-    }
-  }
-  for(var n=0;n<this.data.book.point.length;n++){
-    this.showFire(n)
-  }
+  // for(var j=0;j<this.data.book.point.length;j++){
+  //   for(var i=0;i<this.data.firesLength;i++){
+  //     this.setData({
+  //       [`book.point[${j}].fires[${i}].class`]:'graystars'
+  //     })
+  //   }
+  // }
+  // for(var n=0;n<this.data.book.point.length;n++){
+  //   this.showFire(n)
+  // }
   for(var p=0;p<this.data.review[0].point.length;p++){
     this.reviewshowFire(p)
   }

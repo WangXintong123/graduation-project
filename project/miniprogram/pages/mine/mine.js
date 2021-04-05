@@ -47,6 +47,7 @@ Page({
               nickName:res.data[0].nickName,//用户昵称
               avatarUrl:res.data[0].avatarUrl//用户头像
             })
+            console.log(res.data)
             console.log('[数据库] [查询记录] 成功: ', this.data.nickName)
           },
           fail: err => {

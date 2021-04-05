@@ -7,12 +7,9 @@ Page({
    */
   data: {
     openid:"",//用户唯一标识
-
-    arg_kemu:'数学',
-    more_teacher:[{img:'../image/wuzhongxiang.png',name:'张宇',hot:90,num:0,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-    {img:'../image/wuzhongxiang.png',name:'汤家凤',hot:79,num:1,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-    {img:'../image/wuzhongxiang.png',name:'武忠祥',hot:59,num:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]},
-    {img:'../image/wuzhongxiang.png',name:'李永乐',hot:29,num:2,fires:[{id:0,class:"grayfire"},{id:1,class:"grayfire"},{id:2,class:"grayfire"},{id:3,class:"grayfire"},{id:4,class:"grayfire"}]}],
+    subject:'',
+    arg_kemu:'',
+    more_teacher:[],
     firesLength:5,
   },
 
@@ -26,9 +23,10 @@ Page({
     })
   },
   //进入老师详情页
-  intoDetail:function(){
+  intoDetail:function(e){
+    var name=e.currentTarget.dataset.name
     wx.navigateTo({
-      url: '/pages/shouye/detail/detail',
+      url: `/pages/shouye/detail/detail?name=${name}`,
     })
   },
   //显示详情页的火苗
@@ -39,7 +37,7 @@ Page({
       })
     }
       for(var j=0;j<this.data.firesLength;j++){
-        if (this.data.more_teacher[arg].fires[j].id<=Math.floor(this.data.more_teacher[arg].hot/20)){
+        if (this.data.more_teacher[arg].fires[j].id<=Math.floor(this.data.more_teacher[arg].score/2)){
           this.setData({
             [`more_teacher[${arg}].fires[${j}].class`]:'redfire'
           })
@@ -47,7 +45,23 @@ Page({
     }
     
   },
-  onLoad:function(){
+  onLoad:function(option){
+    this.setData({
+      'arg_kemu':option.kemu
+    })
+    if(this.data.arg_kemu=="数学"){
+      this.setData({
+        'subject':"math"
+      })
+    }else if(this.data.arg_kemu=="英语"){
+      this.setData({
+        'subject':"English"
+      })
+    }if(this.data.arg_kemu=="政治"){
+      this.setData({
+        'subject':"politics"
+      })
+    }
     /****************************************************** */
     //将用户的唯一标识赋给this.data.openid
     if (app.globalData.openid) {
@@ -60,13 +74,27 @@ Page({
     const _ = db.command
     // 查询对应科目教师信息，并按热度从高到低输出
     db.collection('teachers').where({
-      subject: _.eq("math")//math可更改，还可以是English、politics，根据前面的路由提供参数，获得对应的科目类型
+      subject: _.eq(this.data.subject)//math可更改，还可以是English、politics，根据前面的路由提供参数，获得对应的科目类型
     }).orderBy('score', 'desc')
     .get({
       success: res => {
-        // this.setData({
-        //   math:res.data 
-        // })
+        this.setData({
+          more_teacher:res.data 
+        },function(){
+          console.log(this.data.more_teacher)
+           //更多火苗
+            for(var j=0;j<this.data.more_teacher.length;j++){
+              for(var i=0;i<this.data.firesLength;i++){
+                this.setData({
+                  [`more_teacher[${j}].fires[${i}].class`]:'grayfire'
+                })
+              }
+            }
+            //调用火苗函数
+            for(var n=0;n<this.data.more_teacher.length;n++){
+              this.showFire(n)
+            }
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
@@ -79,18 +107,6 @@ Page({
     })
     
 /********************************************************** */
-    //更多火苗
-    for(var j=0;j<this.data.more_teacher.length;j++){
-      for(var i=0;i<this.data.firesLength;i++){
-        this.setData({
-          [`more_teacher[${j}].fires[${i}].class`]:'grayfire'
-        })
-      }
-    }
-    //调用火苗函数
-    for(var n=0;n<this.data.more_teacher.length;n++){
-      this.showFire(n)
-    }
   },
 
   /**
