@@ -9,7 +9,7 @@ Page({
   data: {
     openid:"",//用户唯一标识
 
-    teacher:{name:'武忠祥',point:9.6,mess:'武忠祥从事高等数学教学和考研辅导24年，国家高等数学试题库骨干专家，多次参加考研数学大纲修订及全国性数学考试命题工作。高教版工科教材编写者。考研历年真题研究骨干专家。武忠祥从事高等数学教学和考研辅导24年，国家高等数学试题库骨干专家',books:["《数学考研历年真题分类解析》","《大学数学教程》","《高等数学典型题》","《高等数学辅导讲义》"]},
+    teacher:[],
     xingclass:'dactive',
     tag:false,
     aclass:"type-a",
@@ -304,6 +304,8 @@ Page({
    */
   onLoad: function (options) {//显示一些样式包括火苗，星星，大拇指
     /****************************************************** */
+    var name=options.name
+    console.log(name)
     //将用户的唯一标识赋给this.data.openid
     if (app.globalData.openid) {
       this.setData({
@@ -315,13 +317,13 @@ Page({
     const _ = db.command
     // 获得教师的信息
     db.collection('teachers').where({
-      _id: _.eq("zhangyu")//根据前面的路由提供参数，获得对应的教师的_id
+      _id: _.eq(name)//根据前面的路由提供参数，获得对应的教师的_id
     })
     .get({
       success: res => {
-        // this.setData({
-        //   teacher:res.data 
-        // })
+        this.setData({
+          teacher:res.data 
+        })
         console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {

@@ -7,20 +7,22 @@ Page({
    */
   data: {
     openid:"",//用户唯一标识
-
-    book_rank:"数学考研用书",
-    list_book:[
-    {img:"../image/shuxue.png",name:'《张宇高等数学18讲》',point:9.6,author:'张宇'},
-    {img:"../image/shuxue.png",name:'《张宇高等数学19讲》',point:9.4,author:'张宇'},
-    {img:"../image/shuxue.png",name:'《张宇高等数学17讲》',point:9.0,author:'张宇'},
-    {img:"../image/shuxue.png",name:'《张宇高等数学15讲》',point:8.6,author:'张宇'},
-    {img:"../image/shuxue.png",name:'《张宇高等数学13讲》',point:8.2,author:'张宇'},    
-  ]
+    book_sub:"",
+    list_book:[],
+  //   list_book:[
+  //   {img:"../image/shuxue.png",name:'《张宇高等数学18讲》',point:9.6,author:'张宇'},
+  //   {img:"../image/shuxue.png",name:'《张宇高等数学19讲》',point:9.4,author:'张宇'},
+  //   {img:"../image/shuxue.png",name:'《张宇高等数学17讲》',point:9.0,author:'张宇'},
+  //   {img:"../image/shuxue.png",name:'《张宇高等数学15讲》',point:8.6,author:'张宇'},
+  //   {img:"../image/shuxue.png",name:'《张宇高等数学13讲》',point:8.2,author:'张宇'},    
+  // ]
   },
   //进入书籍页
   intoBook:function(e){
+    console.log(e)
+    var id=e.currentTarget.dataset._id
     wx.navigateTo({
-      url: '/pages/book/bookdetail/bookdetail',
+      url: `/pages/book/bookdetail/bookdetail?id=${id}`,
     })
   },
   //路由会到上一页
@@ -33,6 +35,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.sub)
+    this.setData({
+      'book_sub':options.sub
+    })
 /****************************************************** */
     //将用户的唯一标识赋给this.data.openid
     if (app.globalData.openid) {
@@ -46,14 +52,14 @@ Page({
       name:'limit',
       data:{
         collection:'books',
-        where:{subject:'math'},
+        where:{subject:this.data.book_sub},
         type:'bookrating.score', 
         order:'desc'
       },
       success:res=>{
-        // this.setData({
-        //   book:res.result.data 
-        // })
+        this.setData({
+          'list_book':res.result.data 
+        })
         console.log(res.result.data)
       }
     })
