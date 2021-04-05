@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/authorize/authorize",
     "pages/shouye/shouye",
     "pages/book/bookdetail/bookdetail",
     "pages/shouye/detail/detail",
