@@ -19,7 +19,7 @@ Page({
   //进入老师详情
   gotoDetail:function(e){
     var name=e.target.dataset.name
-    console.log(name)
+    // console.log(name)
     wx.navigateTo({
       url: `/pages/shouye/detail/detail?name=${name}`,
     })
@@ -61,8 +61,8 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        console.log('调用login云函数返回的res',res)
+        // console.log('[云函数] [login] user openid: ', res.result.openid)
+        // console.log('调用login云函数返回的res',res)
         app.globalData.openid = res.result.openid;
         
       }
@@ -127,7 +127,7 @@ Page({
           //调用火苗函数
           this.showFire(1)
         })
-        console.log('[数据库] [查询记录] 成功: ', res.data)
+        // console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({

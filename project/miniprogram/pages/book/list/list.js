@@ -19,7 +19,7 @@ Page({
   },
   //进入书籍页
   intoBook:function(e){
-    console.log(e)
+    // console.log(e)
     var id=e.currentTarget.dataset._id
     wx.navigateTo({
       url: `/pages/book/bookdetail/bookdetail?id=${id}`,
@@ -35,7 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.sub)
+    // console.log(options.sub)
     this.setData({
       'book_sub':options.sub
     })
@@ -60,7 +60,7 @@ Page({
         this.setData({
           'list_book':res.result.data 
         })
-        console.log(res.result.data)
+        // console.log(res.result.data)
       }
     })
     

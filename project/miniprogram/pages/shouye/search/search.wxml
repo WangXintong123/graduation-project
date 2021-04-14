@@ -5,8 +5,17 @@
     <icon class="iconfont icon-xiala type-xiala" bindtap="choseType"></icon>
   </view>
   <input placeholder-class="iconfont icon-ai219" class="search-input" bindinput="getInput"></input>
+  <view  bindtap="search" class="searchbut">搜索</view>
 </view>
 <view class="chose-list" hidden="{{flag}}">
   <view data-name="j" class="list-in" bindtap="getName">教材</view>
   <view data-name="l" class="list-in" bindtap="getName">老师</view>
+</view>
+<view  wx:for="{{arr}}" class="searchcontext" bindtap="into" data-id="{{item.id}}">
+  <image src="{{item.img}}" mode="scaleToFillx"  style='width:220rpx;height:300rpx'></image>
+  <view class="searchinner"> 
+    <text style="font-size:35rpx">{{item.name}}</text>
+    <view class="score">{{item.score}}</view>
+  </view>
+ 
 </view>

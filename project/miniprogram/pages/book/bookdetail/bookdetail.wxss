@@ -35,12 +35,14 @@
 .fixed{
   position: fixed;
   width:100%;
+  z-index:20;
 }
 .show-img{
   width:30%;
   height:75%;
   /* background-color: aquamarine; */
   margin-right: 15rpx;
+  margin-top: 30rpx;
 }
 .show-mess{
   width:55%;

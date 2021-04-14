@@ -14,7 +14,7 @@
     <view class="detail-book">
       代表作：
       <view class="books"><text bindtap="getName" wx:for="{{teacher[0].book}}">《{{item.bookname}}》、</text></view>
-      <view class="detail-like"><icon data-num="1" bindtap="likeChange" class="iconfont icon-xingxing + {{xingclass}}"></icon></view>
+      <view  class="detail-like"><icon data-teachername="{{teacher[0].teachername}}" data-img="{{teacher[0].teacherimg}}" data-score="{{teacher[0].score}}" data-num="1" bindtap="likeChange" class="iconfont icon-xingxing + {{xingclass}}"></icon></view>
     </view>
  </view>
 </view>
@@ -27,20 +27,20 @@
   </view>
 </view>
 <view class="review-out">
-  <view class="review-in" wx:for="{{review}}">
+  <view class="review-in" wx:for="{{list}}">
     <view class="review-user">
-      <view class="user-img"><image src="{{item.img}}" style=" height: 70rpx;width:70rpx;border-radius: 40rpx;"></image></view>
-      <view class="user-name">{{item.name}}</view>
+      <view class="user-img"><image src="{{item.userList[0].avatarUrl}}" style=" height: 70rpx;width:70rpx;border-radius: 40rpx;"></image></view>
+      <view class="user-name">{{item.userList[0].nickName}}</view>
     </view>
     <view class="user-point">推荐指数：
       <view class="point-fires">
         <icon wx:for="{{item.fires}}" wx:key="{{item.id}}" class='iconfont icon-huomiao + {{item.class}}'  ></icon>
       </view>
     </view>
-    <view class="review-word">{{item.word}}</view>
+    <view class="review-word">{{item.content}}</view>
     <view class="review-bot">
       <view class="bot-date">{{item.date}}</view>
-      <view data-num="{{item.no}}" class="{{item.zanclass}}" bindtap="zanChange"><icon class="iconfont icon-dianzan"><text>{{item.like}}</text></icon></view>
+      <view  data-num="{{item._id}}" class="{{item.zanclass}}" bindtap="zanChange"><icon class="iconfont icon-dianzan"><text>{{item.support}}</text></icon></view>
     </view>
   </view>
   <view class="bd-submit" bindtap="show">发表评论</view>
@@ -56,7 +56,7 @@
       <text>{{chose}}</text>
     </view>
     <view class="write-word">
-      <textarea bindinput="textBlur" class="word-class" maxlength="-1"></textarea>
+      <textarea bindinput="textBlur" class="word-class" maxlength="-1" value="{{text_detail}}"></textarea>
     </view>
   </view>
   <!-- <view class="write-sub"></view> -->

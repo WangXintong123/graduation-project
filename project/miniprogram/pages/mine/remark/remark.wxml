@@ -11,7 +11,7 @@
 <view class="review-out">
   <view class="review-one" wx:for="{{arr}}" wx:for-item="titem">
     <view class="review-img">
-     <image  src="{{titem.img}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
+     <image  src="{{titem.image}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
     </view>
     <view class="review-mess">
       <view class="mess-point">
@@ -22,11 +22,11 @@
           </view>
       </view>
       <view class="mess-ping">
-        <text class="mess-text">{{titem.review}}</text>   
+        <text class="mess-text">{{titem.content}}</text>   
       </view>
       <view class="mess-like">
-       <icon class="iconfont icon-dianzan"></icon><text>{{titem.like}}</text>
-       <view class="shanchu"> <icon class="iconfont icon-shanchu1 " style="  color: rgb(163, 163, 163);font-size:40rpx;"></icon></view>
+       <icon class="iconfont icon-dianzan"></icon><text>{{titem.support}}</text>
+       <view bindtap="delete" data-subject="{{titem.subject}}" data-vid="{{titem._id}}" class="shanchu"> <icon class="iconfont icon-shanchu1 " style="  color: rgb(163, 163, 163);font-size:40rpx;"></icon></view>
       </view>
       
     </view>

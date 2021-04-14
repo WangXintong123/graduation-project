@@ -13,5 +13,5 @@
 <view class="mine-function ">
   <view class="pinglun fun-inner" bindtap="intoPing">我的评论</view>
   <view class="shoucang fun-inner" bindtap="intoLike">收藏夹</view>
-  <view class="mine fun-inner" bindtap="intoMine">我的信息</view>
+  <!-- <view class="mine fun-inner" bindtap="intoMine">我的信息</view> -->
 </view>

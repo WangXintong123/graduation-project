@@ -81,7 +81,7 @@ Page({
         this.setData({
           more_teacher:res.data 
         },function(){
-          console.log(this.data.more_teacher)
+          // console.log(this.data.more_teacher)
            //更多火苗
             for(var j=0;j<this.data.more_teacher.length;j++){
               for(var i=0;i<this.data.firesLength;i++){
@@ -95,7 +95,7 @@ Page({
               this.showFire(n)
             }
         })
-        console.log('[数据库] [查询记录] 成功: ', res.data)
+        // console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({

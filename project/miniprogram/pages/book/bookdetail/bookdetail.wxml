@@ -12,7 +12,7 @@
         <view class="book-mess">书名：《{{book[0].bookname}}》</view>
         <!-- <view class="book-mess">科目：{{book[0].kemu}}</view> -->
         <view class="book-mess">作者：{{book[0].writer}}</view>
-        <view class="detail-like"><icon data-num="1" bindtap="likeChange" class="iconfont icon-xingxing + {{xingclass}}"></icon></view>
+        <view ><icon data-num="1" data-bookname="{{book[0].bookname}}"  data-author="{{book[0].writer}}" data-img="{{book[0].bookimg}}" data-score="{{book[0].bookrating.score}}" class="{{detail-like}}" bindtap="likeChange" class="iconfont icon-xingxing + {{xingclass}}"></icon></view>
       </view>
   </view>
   </view>
@@ -41,31 +41,38 @@
     </view>
   </view>
   <view class="review-out">
-    <view class="review-in" wx:for="{{review}}">
+    <view class="review-in" wx:for="{{list}}">
       <view class="review-user">
-        <view class="user-img"><image src="{{item.img}}" style=" height: 70rpx;width:70rpx;border-radius: 40rpx;"></image></view>
-        <view class="user-name">{{item.name}}</view>
+        <view class="user-img"><image src="{{item.userList[0].avatarUrl}}" style=" height: 70rpx;width:70rpx;border-radius: 40rpx;"></image></view>
+        <view class="user-name">{{item.userList[0].nickName}}</view>
       </view>
       <view class="user-point">
         <view class="point-inner">
-          <view class="inner-line" wx:for="{{item.point}}" wx:for-item='bditem'>
-            {{bditem.name}}:
+          <view class="inner-line">
+            {{item.bookrating.cover.name}}:
             <view class="innerpoint-box">
-              <icon wx:for="{{bditem.fires}}" wx:for-item="fitem" class="iconfont icon-xingxing + {{fitem.class}}" ></icon>
+              <icon wx:for="{{item.bookrating.cover.fires}}" wx:for-item="fitem" class="iconfont icon-xingxing + {{fitem.class}}" ></icon>
+            </view>
+          </view>
+          <view class="inner-line">
+            {{item.bookrating.exercise.name}}:
+            <view class="innerpoint-box">
+              <icon wx:for="{{item.bookrating.exercise.fires}}" wx:for-item="fitem" class="iconfont icon-xingxing + {{fitem.class}}" ></icon>
             </view>
           </view>
         </view>
       </view>
-      <view class="review-word">{{item.word}}</view>
+      <view class="review-word">{{item.content}}</view>
       <view class="review-bot">
         <view class="bot-date">{{item.date}}</view>
-        <view data-num="{{item.no}}" class="{{item.zanclass}}" bindtap="zanChange"><icon class="iconfont icon-dianzan"><text>{{item.like}}</text></icon></view>
+        <view data-num="{{item._id}}" class="{{item.zanclass}}" bindtap="zanChange"><icon class="iconfont icon-dianzan"><text>{{item.support}}</text></icon></view>
       </view>
     </view>
     <view style="width:100%;height:100rpx"></view>
   </view>
   <view class="bd-submit" bindtap="show">发表评论</view>
 </view>
+
 <view class="write-out" hidden="{{hide}}">
   <view class="write-inner">
     <view class="write-off">
@@ -84,7 +91,7 @@
       <text>{{chose}}</text>
     </view>
     <view class="write-word">
-      <textarea bindinput="textBlur" class="word-class" maxlength="-1"></textarea>
+      <textarea bindinput="textBlur" class="word-class" maxlength="-1" value="{{text_detail}}"></textarea>
     </view>
   </view>
   <!-- <view class="write-sub"></view> -->
