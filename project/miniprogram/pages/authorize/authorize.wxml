@@ -2,7 +2,7 @@
 <view wx:if="{{isHide}}">
     
         <view class='header'>
-            <image src='cloud://xly-u3yqj.786c-xly-u3yqj-1305085260/images/icon.png'></image>
+            <image src='../../images/logo.png'></image>
         </view>
  
         <view class='content'>
