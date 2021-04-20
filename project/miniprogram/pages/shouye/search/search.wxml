@@ -15,7 +15,7 @@
   <image src="{{item.img}}" mode="scaleToFillx"  style='width:220rpx;height:300rpx'></image>
   <view class="searchinner"> 
     <text style="font-size:35rpx">{{item.name}}</text>
-    <view class="score">{{item.score}}</view>
+    <view class="score">评分：{{item.score}}</view>
   </view>
  
 </view>
