@@ -10,21 +10,7 @@
     "pages/book/list/list",
     "pages/book/book",
     "pages/shouye/search/search",
-    "pages/shouye/more/more",
-    
-    "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/shouye/more/more"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

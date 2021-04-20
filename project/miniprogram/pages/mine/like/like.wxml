@@ -10,11 +10,11 @@
 </view>
 <view style="margin-top:200rpx">
 
-  <view bindtap="intoteacher"  class="like-teacher" wx:for="{{like_teacher}}" wx:for-item="lteacherItem" data-name="{{lteacherItem.name}}" hidden="{{flagt}}">
-    <view class="like-pic" >
+  <view   class="like-teacher" wx:for="{{like_teacher}}" wx:for-item="lteacherItem" data-name="{{lteacherItem.name}}" hidden="{{flagt}}">
+    <view bindtap="intoteacher" class="like-pic" >
       <image src="{{lteacherItem.image}}" mode="scaleToFill"  style='width:180rpx;height:230rpx'/>
     </view>
-    <view class="like-mess" >
+    <view bindtap="intoteacher" class="like-mess" >
       <text style="font-size:35rpx">{{lteacherItem.teachername}}</text>
       <view class="like-fire">
         <icon wx:for="{{lteacherItem.fires}}" wx:key="{{item.id}}" class='iconfont icon-huomiao + {{item.class}}'  ></icon>
@@ -23,11 +23,11 @@
     <view data-id="{{lteacherItem._id}}" bindtap="deleteteacher" class="dislike">取消收藏</view> 
   </view>
 
-  <view bindtap="intobook" class="like-teacher" wx:for="{{like_book}}" wx:for-item="lteacherItem" hidden="{{flagb}}" data-name="{{lteacherItem.name}}">
-    <view  class="one-img" bindtap="intoDetail"  >
+  <view  class="like-teacher" wx:for="{{like_book}}" wx:for-item="lteacherItem" hidden="{{flagb}}" data-name="{{lteacherItem.name}}">
+    <view  bindtap="intobook"  class="one-img" bindtap="intoDetail"  >
       <image src="{{lteacherItem.image}}" mode="scaleToFill"  style='width:100%;height:100%;'></image>
     </view>
-    <view class="one-another" >
+    <view  bindtap="intobook" class="one-another" >
       <view class="another-detail">书名:<view class="detail-name"><text>《{{lteacherItem.bookname}}》</text></view></view>
       <view class="another-detail">评分:<view style="margin-left:15rpx;color:#fa381e;font-size:40rpx">{{lteacherItem.score}}</view></view>
       <view class="another-detail">作者:<view style="margin-left:15rpx">{{lteacherItem.author}}</view></view>  
