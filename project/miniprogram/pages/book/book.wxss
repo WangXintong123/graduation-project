@@ -5,9 +5,10 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #fa381e;
-  height:70rpx;
+  height:125rpx;
   color: #fff;
   justify-content: center;
+  padding-top: 35rpx;
 } 
 .book-container text{
   font-size: 32rpx;
@@ -17,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 70rpx;
+  margin-top: 100rpx;
 }
 .kemu-list{
   width:85%;

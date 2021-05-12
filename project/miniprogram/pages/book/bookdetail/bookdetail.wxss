@@ -5,11 +5,12 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #fa381e;
-  height:80rpx;
+  height:120rpx;
   color: #fff;
   justify-content: center;
   flex-direction: row;
   position: relative;
+  padding-top: 50rpx;
 } 
 .like-container text{
   font-size: 38rpx;
@@ -29,7 +30,7 @@
   flex-direction: row;
   /* align-items: center; */
   justify-content: center;
-  margin-top: 95rpx;
+  margin-top: 155rpx;
   
 }
 .fixed{

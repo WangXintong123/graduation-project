@@ -1,6 +1,7 @@
    <!--miniprogram/pages/shouye/search/search.wxml-->
 <view class="fixed">
   <view class='search-chose'>
+    <icon class="huitui iconfont icon-arrow-left" bindtap="back"></icon>
     <view class="chose-type">
       <view class="type-name">{{name}}</view>
       <icon class="iconfont icon-xiala type-xiala" bindtap="choseType"></icon>
@@ -13,7 +14,7 @@
     <view data-name="l" class="list-in" bindtap="getName">老师</view>
   </view>
 </view>
-<view style="margin-top:80rpx">
+<view style="margin-top:250rpx">
   <view  wx:for="{{arr}}" class="searchcontext" bindtap="into" data-id="{{item.id}}">
     <image src="{{item.img}}" mode="scaleToFillx"  style='width:220rpx;height:300rpx'></image>
     <view class="searchinner"> 

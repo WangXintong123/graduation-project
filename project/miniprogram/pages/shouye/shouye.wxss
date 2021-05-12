@@ -13,9 +13,10 @@ page {
   align-items: center;
   box-sizing: border-box;
   background-color: #fa381e;
-  height:65rpx;
+  height:125rpx;
   color: #fff;
   justify-content: center;
+  padding-top: 30rpx;
 } 
 .container text{
   font-size: 30rpx;
@@ -46,7 +47,7 @@ page {
   font-size: 27rpx;
 }
 #shouye{
-  margin-top: 135rpx;
+  margin-top: 190rpx;
 }
 /* 教师部分 */
 .shouye-teacher{
