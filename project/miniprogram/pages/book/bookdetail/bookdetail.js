@@ -21,10 +21,15 @@ Page({
     dclass:'type-da',
     firesLength:5,
     list:[],
+    book:[],
     zanclass:'',
     book_id:'',
     onescore:0,
-    twoscore:0
+    twoscore:0,
+    zscore:0,
+    lscore:0,
+    score:0,
+    count:0
   },
   //改变收藏星星样式
   likeChange:function(e){
@@ -298,14 +303,14 @@ Page({
             cover:{
               fires:[{class:"grayfire",id:"0"},{class:"grayfire",id:"1"},{class:"grayfire",id:"2"},{class:"grayfire",id:"3"},{class:"grayfire",id:"4"}],
               name:"知识点覆盖程度",
-              num:this.data.onescore
+              num:Number(this.data.onescore)
             },
             exercise:{
               fires:[{class:"grayfire",id:"0"},{class:"grayfire",id:"1"},{class:"grayfire",id:"2"},{class:"grayfire",id:"3"},{class:"grayfire",id:"4"}],
               name:"例题及练习题使用价值",
-              num:this.data.twoscore
+              num:Number(this.data.twoscore)
             },
-            score:(this.data.onescore+this.data.twoscore)/2
+            score:Number(((this.data.onescore+this.data.twoscore)/2).toFixed(1))
         },
         content:this.data.text_detail,
         support:0,//一开始点赞数为0
@@ -317,6 +322,27 @@ Page({
         subject:'book'
       },
       success: res => {
+        
+        //更新书籍数据库的分数
+        db.collection('books').doc(this.data.book_id)
+        .update({
+          data:{
+            bookrating:{
+              cover:{
+                fires:[{class:"grayfire",id:"0"},{class:"grayfire",id:"1"},{class:"grayfire",id:"2"},{class:"grayfire",id:"3"},{class:"grayfire",id:"4"}],
+                name:"知识点覆盖程度",
+                num:Number(((this.data.zscore*this.data.count+(this.data.onescore+1)*2)/(this.data.count+1)).toFixed(1))
+              },
+              exercise:{
+                fires:[{class:"grayfire",id:"0"},{class:"grayfire",id:"1"},{class:"grayfire",id:"2"},{class:"grayfire",id:"3"},{class:"grayfire",id:"4"}],
+                name:"例题及练习题使用价值",
+                num:Number(((this.data.lscore*this.data.count+(this.data.twoscore+1)*2)/(this.data.count+1)).toFixed(1))
+              },
+              score:Number(((((this.data.zscore*this.data.count+(this.data.onescore+1)*2)/(this.data.count+1))+((this.data.lscore*this.data.count+(this.data.twoscore+1)*2)/(this.data.count+1)))/2).toFixed(1))
+            }
+            
+          }
+        })
         // 创建成功后重新渲染评论列表
         wx.cloud.callFunction({
           name:'lookup',
@@ -331,8 +357,13 @@ Page({
           },
           success:res=>{
             this.setData({
-              list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+              list:res.result.list ,//res.result.list里存储着所有的评论，userList也在里面
+              [`book[${0}].bookrating.cover.num`]:Number(((this.data.zscore*this.data.count+(this.data.onescore+1)*2)/(this.data.count+1)).toFixed(1)),
+              [`book[${0}].bookrating.exercise.num`]:Number(((this.data.lscore*this.data.count+(this.data.twoscore+1)*2)/(this.data.count+1)).toFixed(1))
             },function(){
+              this.setData({
+                count:this.data.count+1
+              })
               for(var p=0;p<this.data.list.length;p++){
                 this.reviewshowFire(p)
                 if(this.data.list[p].zantag){
@@ -353,6 +384,7 @@ Page({
                   'text_detail':'',
                 })
               }
+              this.showFire();
             })
             // console.log(res.result.list)
           }
@@ -435,6 +467,9 @@ Page({
       success: res => {
         this.setData({
           book:res.data ,
+          score:res.data[0].bookrating.score,
+          zscore:res.data[0].bookrating.cover.num,
+          lscore:res.data[0].bookrating.exercise.num,
         },function(){
           for(var i=0;i<this.data.firesLength;i++){
             this.setData({
@@ -444,7 +479,7 @@ Page({
           }
           this.showFire()
         })
-        // console.log('[数据库] [查询记录] 成功: ', res.data)
+        console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
@@ -470,7 +505,8 @@ Page({
       },
       success:res=>{
         this.setData({
-          list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+          list:res.result.list ,//res.result.list里存储着所有的评论，userList也在里面
+          count:res.result.list.length
         },function(){
           for(var p=0;p<this.data.list.length;p++){
             this.reviewshowFire(p)

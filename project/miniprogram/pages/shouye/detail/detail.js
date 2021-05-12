@@ -16,6 +16,7 @@ Page({
     dclass:'type-da',
     firesLength:5,
     list:[],
+    conut:0,
     zanclass:'',
     fires:[
       {name:0,firestyle:'grayfireset'},
@@ -29,7 +30,8 @@ Page({
     chose:'',
     teacher_score:0,
     hide:true,
-    text_detail:''
+    text_detail:'',
+    score:0
   },
   //路由跳转
   back:function(e){
@@ -300,6 +302,14 @@ Page({
         fires:[{class:"grayfire",id:"0"},{class:"grayfire",id:"1"},{class:"grayfire",id:"2"},{class:"grayfire",id:"3"},{class:"grayfire",id:"4"}]
       },
       success: res => {
+        //更改教师数据库分数
+        db.collection('teachers').doc(this.data.teacher_id)
+        .update({
+          data:{
+            // score: this.data.teacher_score,
+            score:Number(((this.data.teacher[0].score*this.data.count+(this.data.teacher_score+1)*2)/(this.data.count+1)).toFixed(1))
+          }
+        })
         // 创建成功后重新渲染评论列表
         wx.cloud.callFunction({
           name:'lookup',
@@ -314,8 +324,12 @@ Page({
           },
           success:res=>{
             this.setData({
-              list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+              list:res.result.list ,//res.result.list里存储着所有的评论，userList也在里面，
+              [`teacher[${0}].score`]:Number(((this.data.teacher[0].score*this.data.count+(this.data.teacher_score+1)*2)/(this.data.count+1)).toFixed(1))
             },function(){
+              this.setData({
+                count:this.data.count+1
+              })
               for(var n=0;n<this.data.list.length;n++){
                 this.showFire(n)
                 if(this.data.list[n].zantag){
@@ -411,7 +425,7 @@ Page({
         this.setData({
           teacher:res.data 
         })
-        // console.log('[数据库] [查询记录] 成功: ', res.data)
+        console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
@@ -437,7 +451,8 @@ Page({
       },
       success:res=>{
         this.setData({
-          list:res.result.list //res.result.list里存储着所有的评论，userList也在里面
+          list:res.result.list, //res.result.list里存储着所有的评论，userList也在里面
+          count:res.result.list.length
         },function(){
           for(var n=0;n<this.data.list.length;n++){
             this.showFire(n)

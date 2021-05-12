@@ -39,7 +39,7 @@ Page({
         this.setData({
           'kemu[0].book':res.data
         })
-        // console.log('[数据库] [查询记录] 成功: ', res.data)
+        console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
@@ -59,7 +59,7 @@ Page({
         this.setData({
           'kemu[1].book':res.data
         })
-        // console.log('[数据库] [查询记录] 成功: ', res.data)
+        console.log('[数据库] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({
