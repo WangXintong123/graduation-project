@@ -41,9 +41,14 @@ Page({
   //获取搜索内容
   getInput:function(e){
     this.setData({
-      "word":e.detail.value
+      "word":e.detail.value,
     })
     // console.log(this.data.word)
+  },
+  hide:function(){
+    this.setData({
+      "flag":true
+    })
   },
 
   /***************************************************** */

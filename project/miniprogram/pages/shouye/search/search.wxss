@@ -33,6 +33,9 @@
   width:180rpx;
   height:150rpx;
   background-color: #fa381e;
+  z-index: 10;
+  position:fixed;
+  top:90rpx;
 }
 .list-in{
   width:150rpx;
@@ -75,4 +78,10 @@
   font-size: 40rpx;
   color: #fa381e;
   margin-top: 80rpx;
+}
+.fixed{
+  position: fixed;
+  top:0;
+  z-index: 20;
+  width:100%
 }
